@@ -1,0 +1,429 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+  <title>JavaScript常见的内存泄漏 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"dunktu.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Dunktu</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg/index.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JavaScript常见的内存泄漏">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-24 22:46" pubdate>
+        2021年12月24日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JavaScript常见的内存泄漏</h1>
+            
+            <div class="markdown-body">
+              <h1 id="一-什么是内存泄漏"><a href="#一-什么是内存泄漏" class="headerlink" title="一.什么是内存泄漏"></a>一.什么是内存泄漏</h1><p>当应用程序不再需要的内存，由于某种原因未返回给操作系统或者空闲内存，这将会导致程序变慢、卡顿、高延迟</p>
+<h1 id="二-内存泄漏的主要原因"><a href="#二-内存泄漏的主要原因" class="headerlink" title="二.内存泄漏的主要原因"></a>二.内存泄漏的主要原因</h1><p>JavaScript内存泄漏的主要原因在于一些不再需要的引用（Unwanted References）。</p>
+<p>所谓的<strong>Unwanted References</strong>指的是：有一些内存，其实开发人员已经不再需要了，但是由于某种原因，这些内存仍然被标记并保留在活动根目录树中。Unwanted References就是指对这些内存的引用。在JavaScript上下文中，Unwanted References是一些不再使用的变量，这些变量指向了原本可以释放的一些内存。</p>
+<h1 id="三-常见的内存泄漏"><a href="#三-常见的内存泄漏" class="headerlink" title="三.常见的内存泄漏"></a>三.常见的内存泄漏</h1><h2 id="1-全局变量造成的内存泄漏"><a href="#1-全局变量造成的内存泄漏" class="headerlink" title="1.全局变量造成的内存泄漏"></a>1.全局变量造成的内存泄漏</h2><p>在JS的运行机制中，全局变量是直接由根节点所引用的，所以在整个程序的生命周期中都不会被回收</p>
+<ul>
+<li>引用未声明变量<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ada"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(arg) &#123;<br>    bar = &quot;this <span class="hljs-keyword">is</span> a hidden global variable<span class="hljs-string">&quot;;</span><br><span class="hljs-string">&#125;</span><br></code></pre></td></tr></table></figure></li>
+<li>将变量设置为全局变量window的属性<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ada"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(arg) &#123;<br>    window.bar = &quot;this <span class="hljs-keyword">is</span> an explicit global variable<span class="hljs-string">&quot;;</span><br><span class="hljs-string">&#125;</span><br></code></pre></td></tr></table></figure></li>
+<li>盲目使用this，导致挂载到全局变量的属性上<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs actionscript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">this</span>.variable = <span class="hljs-string">&quot;potential accidental global&quot;</span>;<br>&#125;<br>foo();<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>综上：</strong><br>1.避免意外地创建全局变量，可以使用严格模式。<br>2.减少创建全局变量<br>3.如果必须使用全局变量来存储大量数据，必须确保在处理完数据后将其放置null或者从新分配</p>
+<h2 id="2-忘记释放的计时器"><a href="#2-忘记释放的计时器" class="headerlink" title="2.忘记释放的计时器"></a>2.忘记释放的计时器</h2><h2 id="3-多处引用"><a href="#3-多处引用" class="headerlink" title="3.多处引用"></a>3.多处引用</h2><p>当多个变量均引用同一个对象时，只要有一个引用没有清除，都将导致被引用的对象无法GC。<br><strong>例子：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> elements = &#123;<br>    <span class="hljs-attr">button</span>: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;button&#x27;</span>),<br>    <span class="hljs-attr">image</span>: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;image&#x27;</span>),<br>    <span class="hljs-attr">text</span>: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;text&#x27;</span>)<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doStuff</span>(<span class="hljs-params"></span>) </span>&#123;<br>    image.src = <span class="hljs-string">&#x27;http://some.url/image&#x27;</span>;<br>    button.click();<br>    <span class="hljs-built_in">console</span>.log(text.innerHTML);<br>    <span class="hljs-comment">// Much more logic</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">removeButton</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-comment">// The button is a direct child of body.</span><br>    <span class="hljs-built_in">document</span>.body.removeChild(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;button&#x27;</span>));<br><br>    <span class="hljs-comment">// At this point, we still have a reference to #button in the global</span><br>    <span class="hljs-comment">// elements dictionary. In other words, the button element is still in</span><br>    <span class="hljs-comment">// memory and cannot be collected by the GC.s</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>上面的代码示例中，#button被两个变量引用，一个在DOM树中，另一个在elements对象中。如果将来决定回收button，需要将两个引用都释放，而上面的代码仅仅只释放了DOM中的button引用，而element对象中依然保持着对button的引用，所以button不会被GC</p>
+<p><strong>还有这么一种情况：</strong> 如果我们想要回收某个table，但我们保持着对这个table中某个单元格（cell）的引用，这个时候将导致整个table都保存在内存中，无法GC。</p>
+<h2 id="4-闭包"><a href="#4-闭包" class="headerlink" title="4.闭包"></a>4.闭包</h2><p>闭包(Closure)：闭包是一个函数，它可以访问那些定义在它的包围作用域（Enclosing Scope）里的变量，即使这个包围作用域已经结束。因此，闭包具有记忆周围环境（Context）的功能。<br><strong>例子：</strong></p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs haxe"><span class="hljs-keyword">var</span> <span class="hljs-keyword">new</span><span class="hljs-type">Elem</span>;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">outer</span></span>() &#123;<br>   <span class="hljs-keyword">var</span> someText = <span class="hljs-keyword">new</span> <span class="hljs-type">Array</span>(<span class="hljs-number">1000000</span>);<br>   <span class="hljs-keyword">var</span> elem = <span class="hljs-keyword">new</span><span class="hljs-type">Elem</span>;<br>   <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">inner</span></span>() &#123;<br>       <span class="hljs-keyword">if</span> (elem) <span class="hljs-keyword">return</span> someText;<br>   &#125;<br>   <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> </span>() &#123;&#125;;<br>&#125;<br>setInterval(<span class="hljs-function"><span class="hljs-keyword">function</span> </span>() &#123;<br>   <span class="hljs-keyword">new</span><span class="hljs-type">Elem</span> = outer();<br>&#125;, <span class="hljs-number">5</span>);<br></code></pre></td></tr></table></figure>
+<p>在这个例子中，有两个闭包：一个是inner，另一个是匿名函数function () {}。其中，inner闭包引用了someText和elem，并且，inner永远也不会被调用。可是，我们需要注意：<strong>相同父作用域的闭包，他们能够共享context。 也就是说，在这个例子中，inner的someText和elem将和匿名函数function () {}共享。</strong>然而，这个匿名函数之后会被return返回，并且赋值给newElem。只要newElem还引用着这个匿名函数，那么，someText和elem就不会被GC。</p>
+<p>同时，我们还要注意到，outer函数内部执行了var elem = newElem;，而这个newElem引用了上一次调用的outer返回的匿名函数。试想，第n次调用outer将保持着第n-1次调用的outer中的匿名函数，而这个匿名函数由保持着对elem的引用，进而保持着对n-2次的…因此，这将造成内存泄漏。</p>
+<p><strong>解决方案：</strong>setInterval中的参数1的代码改为newElem = outer()();</p>
+<h2 id="5-console-log"><a href="#5-console-log" class="headerlink" title="5.console.log"></a>5.console.log</h2><p>由于我们传给console.log的对象需要在控制台打印出来查看信息，所以这部分对象的内存是不会被垃圾回收的，这样也会造成内存泄漏。</p>
+<hr>
+<p>阅读链接：<br><a target="_blank" rel="noopener" href="https://auth0.com/blog/four-types-of-leaks-in-your-javascript-code-and-how-to-get-rid-of-them/">https://auth0.com/blog/four-types-of-leaks-in-your-javascript-code-and-how-to-get-rid-of-them/</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Javascript/">Javascript</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/12/24/V8%E4%B8%AD%E7%9A%84JavaScript%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">V8中的JavaScript的内存管理与垃圾回收</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/12/24/Vue-Router%E4%B8%A4%E7%A7%8D%E8%B7%AF%E7%94%B1%E6%A8%A1%E5%BC%8F/">
+                        <span class="hidden-mobile">Vue Router两种路由模式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="#" rel="nofollow noopener"><span>Dunktu</span></a> <i class="iconfont icon-love"></i> <a href="#" rel="nofollow noopener"><span>涂博闻</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

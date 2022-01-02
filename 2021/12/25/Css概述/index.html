@@ -1,0 +1,531 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+  <title>Css概述 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"dunktu.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Dunktu</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg/index.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Css概述">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-25 10:53" pubdate>
+        2021年12月25日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      31
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Css概述</h1>
+            
+            <div class="markdown-body">
+              <p>前言：我把CSS样式的一些基础知识总结了一下，作为自己的复习</p>
+<hr>
+<h1 id="1-内联与块"><a href="#1-内联与块" class="headerlink" title="1.内联与块"></a>1.内联与块</h1><p><strong>内联元素</strong>：内联元素不会占用一整行，他只会占用他自己元素大小的空间<br><strong>块级元素</strong>：会独占一行的元素，无论他的内容有多少他都会独占一整行<br>a元素可以包含除了他本身以外的任意元素，p元素不能包含其他任何块元素</p>
+<h1 id="2-CSS选择器"><a href="#2-CSS选择器" class="headerlink" title="2.CSS选择器"></a>2.CSS选择器</h1><table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>语法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>元素选择器</td>
+<td>标签名{}</td>
+</tr>
+<tr>
+<td>id选择器</td>
+<td>#id属性值{}</td>
+</tr>
+<tr>
+<td>类选择器</td>
+<td>.class属性名</td>
+</tr>
+<tr>
+<td>选择器分组</td>
+<td>选择器1，选择器2，选择器3{}（通过选择器分组可以同时选中多个选择器对应的元素）</td>
+</tr>
+<tr>
+<td>通配选择器</td>
+<td>*{}（它可以用来选中页面中的所有元素）</td>
+</tr>
+<tr>
+<td>复合选择器</td>
+<td>选择器1选择器2选择器3{}（可以选中同时满足多个选择器的元素）</td>
+</tr>
+<tr>
+<td>后代元素选择器</td>
+<td>祖先元素 后代元素{}（选中指定元素的指定后代元素）</td>
+</tr>
+<tr>
+<td>子元素选择器</td>
+<td>父元素&gt;子元素（选中指定父元素的指定子元素）</td>
+</tr>
+<tr>
+<td>伪类选择器</td>
+<td>a:link -&gt;为没有访问过的链接添加样式，a:visited -&gt;为访问过的链接修改样式，a:hover -&gt;为鼠标移入链接时修改状态，a:active -&gt;表示的是超链接被点击的状态，:focus伪类-&gt;获取焦点</td>
+</tr>
+<tr>
+<td>伪元素控制样式</td>
+<td>:first-letter表示设置第一个字符的样式，:before表示元素最前边的部分，一般before都需要结合content这个样式一起使用，通过content可以向before或after的位置添加一些元素，:after同理</td>
+</tr>
+<tr>
+<td>属性选择器</td>
+<td>[属性名]选取含有指定属性的元素，[属性名=”属性值”]选取含有指定属性值的元素，[属性名^=”属性值”]选取属性值以指定内容开头的元素,[属性名$=”属性值”]选取属性值以指定内容结尾的元素，[属性名*=”属性值”]选取属性值以包含指定内容的元素。（可以根据元素中的属性或属性值来选取指定元素）</td>
+</tr>
+<tr>
+<td>子元素的伪类</td>
+<td>first-child 可以选中第一个子元素，last-child 可以选中最后一个子元素，nth-child 可以选中任意位置的子元素：该选择器后边可以指定一个参数，指定要选中第几个子元素，even 表示偶数位置的子元素，odd 表示奇数位置的子元素</td>
+</tr>
+<tr>
+<td>兄弟选择器</td>
+<td>（可上网搜索语法）</td>
+</tr>
+<tr>
+<td>否定伪类</td>
+<td>:not(选择器)（可以从已选中的元素中剔除某些元素）</td>
+</tr>
+</tbody></table>
+<h1 id="3-选择器优先级"><a href="#3-选择器优先级" class="headerlink" title="3.选择器优先级"></a>3.选择器优先级</h1><p>（1）内联样式——1000</p>
+<p>（2）id选择器——100</p>
+<p>（3）类和伪类——10</p>
+<p>（4）元素选择器——1</p>
+<p>（5）通配选择器——0</p>
+<p>（6）继承的样式——无优先级</p>
+<p><strong>当选择器中包含有多种选择器是，需要将多种选择器的优先级相加然后再比较。但是注意，选择器优先级计算不会超过他的最大数量级，如果选择器的优先级一样，则使用靠后的样式。</strong></p>
+<p><strong>并集选择器的优先级是单独计算。</strong></p>
+<p><strong>可以在样式的最后添加一个!important，则此时该样式将会获得一个最高的优先级，将会优先于所有的样式显示甚至超过内联样式。</strong><br>#4.链接标签的伪类顺序<br>最好以link、visited、hover、active的顺序写，否则由于这四个选择器的优先级是一样的，会造成一些样式的覆盖。<br>#5.盒子模型<br><img src="https://upload-images.jianshu.io/upload_images/24026585-91162257c86526dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" lazyload alt="CSS的盒子模型"><br><strong>盒子的可见框大小由内容区，内边距和边框共同决定</strong></p>
+<p><strong>内边距</strong>：由padding属性来设置，内边距会影响盒子的可见框大小，元素的背景会延申到内边距</p>
+<p><strong>外边距</strong>：外边距指的是当前盒子于其他盒子之间的距离，他不会影响盒子可见框的大小，而会影响到盒子的位置。通过margin属性来设置。margin值可以设置为一个负值，那么则会导致指定位置的边距向相反方向移动，值还可以设置为auto，可以使用 margin:0 auto 来使得元素在父元素中水平居中</p>
+<p><strong>外边距的重叠</strong>：垂直外边距的重叠，在网页中垂直方向的相邻外边距会发生外边距的重叠，这种情况是指兄弟元素之间的相邻外边距会取最大值而不是取和，注意是相邻外边距，如果有其他元素使得两个元素分开，则不会重叠。而如果父子元素的外边距相邻了，那么子元素的外边距将会设置给父元素。</p>
+<p><strong>内联元素</strong>：不能设置width和height,但是可以设置水平竖直方向的内边距和边框，水平方向的内边距以及边框会影响布局，而竖直方向的则不会影响，会产生覆盖的效果。内联元素支持水平方向的外边距，但是不支持垂直方向的外边距，并且水平方向的外边距不会重叠，而是求和。</p>
+<h1 id="6-元素在文档流中的特点"><a href="#6-元素在文档流中的特点" class="headerlink" title="6.元素在文档流中的特点"></a>6.元素在文档流中的特点</h1><h2 id="块元素："><a href="#块元素：" class="headerlink" title="块元素："></a>块元素：</h2><p>（1）块元素在文档流中会独占一行，块元素会自上向下排列</p>
+<p>（2）块元素在文档流中默认宽度是父元素的100%</p>
+<p>（3）当元素的宽度的值为auto时，此时指定内边距不会影响可见框的大小，而是会自动修改宽度，以适应内边距</p>
+<p>（4）块元素在文档流的高度默认被内容撑开</p>
+<h2 id="内联元素："><a href="#内联元素：" class="headerlink" title="内联元素："></a>内联元素：</h2><p>（1）内联元素在文档流中只占自身的大小，会默认从左到右排列，如果一行中不足以容纳所有的内联元素，则换到下一行，继续自左向右</p>
+<p>（2）在文档流中内联元素的高度和宽度默认都被内容撑开<br>#7.盒模型的浮动<br>当我们设置一个元素脱离文档流之后，它下边的元素会立即向上移动，而浮动的元素会尽量的向页面的左上或者右上漂浮，直到遇到父元素的边框或者其他的浮动元素。<br><strong>如果浮动元素上边是一个没有浮动的元素，则浮动元素不会超过块元素。浮动的元素不会超过他上边的兄弟元素，最多一边齐而且浮动的元素不会盖住文字，文字会自动环绕在浮动元素的周围，所以我们可以通过浮动来设置文字环绕图片的效果</strong>在文档流中，子元素的宽度默认占据父元素的全部，但是当元素设置浮动之后，会完全的脱离文档流，高度和宽度都是被内容撑开的。<strong>而且在内联元素开启浮动以后就会变成块元素，就可以随便设置宽度和高度了。</strong></p>
+<h1 id="8-高度坍塌问题"><a href="#8-高度坍塌问题" class="headerlink" title="8.高度坍塌问题"></a>8.高度坍塌问题</h1><h2 id="高度塌陷"><a href="#高度塌陷" class="headerlink" title="高度塌陷"></a>高度塌陷</h2><p>当我们为子元素设置浮动以后，子元素就会脱离文档流，此时将会导致子元素无法撑起父元素的高度，导致父元素的高度塌陷，由于父元素的高度塌陷了，就会导致父元素下面的所有元素向上移动，从而导致布局混乱。</p>
+<h2 id="探讨解决高度塌陷的方法"><a href="#探讨解决高度塌陷的方法" class="headerlink" title="探讨解决高度塌陷的方法"></a>探讨解决高度塌陷的方法</h2><p><strong>我们可以打开元素的BFC，当开启元素的BFC以后</strong></p>
+<ul>
+<li>（1）父元素的垂直外边距不会和子元素重叠</li>
+<li>（2）开启BFC的元素不会被浮动元素所覆盖</li>
+<li>（3）开启BFC的元素可以包含浮动的子元素</li>
+</ul>
+<p><strong>如何开启元素的BFC：</strong></p>
+<ul>
+<li>1.设置元素浮动</li>
+<li>2.设置元素的绝对定位</li>
+</ul>
+<p><strong>使用以上两种方式开启虽然可以撑开父元素，但是会导致父元素的宽度丢失，而且使用这种方式也会导致下边的元素上移，不能解决问题。</strong></p>
+<ul>
+<li>3.设置元素为inline-block</li>
+</ul>
+<p><strong>这种方式可以解决问题，但是会导致宽度丢失</strong></p>
+<ul>
+<li>4.将元素的overflow设置为一个非visible的值</li>
+</ul>
+<p><strong>这是比较推荐的方法，将overflow设置为hidden是副作用最小的方式</strong></p>
+<h2 id="解决高度坍塌的改良办法"><a href="#解决高度坍塌的改良办法" class="headerlink" title="解决高度坍塌的改良办法"></a>解决高度坍塌的改良办法</h2><p>我们有时希望清除掉其他元素浮动对当前元素产生的影响，这时可以使用clear来完成功能，clear可以用来清除其他浮动元素对当前元素的影响，none是默认值不会清除浮动，left会清除左侧浮动元素对当前元素的影响，right会清除右侧浮动元素对当前元素的影响，而both则会清除两侧浮动元素中，对他影响最大的那个元素的浮动。</p>
+<p><strong>（1）我们可以直接在高度塌陷的父元素的最后添加一个空白的div，由于这个div没有浮动，所以他是可以撑开父元素的高度的，基本没有副作用</strong></p>
+<p><strong>（2）可以通过after伪类向元素的最后一个添加一个空白的块元素，然后对其清除浮动，这样做和添加一个div的原理是一样的，几乎没有副作用</strong></p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">.clearfix:</span>after&#123;<br><span class="hljs-comment">/*添加一个内容*/</span><br><span class="hljs-symbol">content:</span><span class="hljs-string">&quot;&quot;</span><span class="hljs-comment">;</span><br><span class="hljs-comment">/*转换为一个块元素*/</span><br><span class="hljs-symbol">display:</span>block<span class="hljs-comment">;</span><br><span class="hljs-comment">/*清除两侧的浮动*/</span><br><span class="hljs-symbol">clear:</span>both<span class="hljs-comment">;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>可以向需要处理的元素中添加这个样式就不会出现高度塌陷问题了</strong></p>
+<h1 id="9-定位属性"><a href="#9-定位属性" class="headerlink" title="9.定位属性"></a>9.定位属性</h1><h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><p>默认值</p>
+<h2 id="relative"><a href="#relative" class="headerlink" title="relative"></a>relative</h2><p>1.当开启了元素的相对定位以后，而不设置偏移量，元素不会发生任何变化</p>
+<p><strong>2.相对定位是相对于元素在文档流中原来的位置进行定位</strong></p>
+<p><strong>3.相对定位的元素不会脱离文档流</strong></p>
+<p><strong>4.相对定位的元素会使元素提升一个层次</strong><br>5.相对定位不会改变元素的性质，块还是块，内联还是内联</p>
+<h2 id="absolute"><a href="#absolute" class="headerlink" title="absolute"></a>absolute</h2><p><strong>1.当开启了元素绝对定位，会使元素脱离文档流</strong></p>
+<p>2.当开启了元素的绝对定位以后，而不设置偏移量，元素不会发生任何变化</p>
+<p><strong>3.绝对定位是相对于离他最近的开启了定位的祖先元素进行定位的（一般情况，开启了子元素的绝对定位都会同时开启父元素的相对定位）如果所有的祖先元素都没有开启定位，则会相对于浏览器窗口进行定位</strong></p>
+<p>4.绝对定位的元素会提升一个层级</p>
+<p><strong>5.绝对定位会改变元素的性质，内联元素会变成块元素，块元素的高度和宽度会被内容撑开</strong></p>
+<h2 id="fixed"><a href="#fixed" class="headerlink" title="fixed"></a>fixed</h2><p>固定定位也是一种特殊的绝对定位，大部分特点和绝对定位一样，但是固定定位永远都会相对于浏览器窗口进行定位，并且永远会固定在浏览器窗口的某个位置，不会随着滚动条移动</p>
+<p>如果定位元素的层级是一样的，那么下边的元素会盖住上边的，我们还可以通过z-index属性来设置元素的层级，可以为z-index指定一个正整数作为值，该值将会作为当前元素的层级，层级越高越优先显示，<strong>但是对于没有开启定位的元素不能使用z-index，而且父元素的层级再高也不会盖住子元素</strong></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Css/">Css</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/12/25/%E9%A1%B5%E9%9D%A2%E9%87%8D%E7%BB%98%E4%B8%8E%E5%9B%9E%E6%B5%81/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">页面重绘与回流</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/12/25/cookie/">
+                        <span class="hidden-mobile">Cookie与Webstorage</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="#" rel="nofollow noopener"><span>Dunktu</span></a> <i class="iconfont icon-love"></i> <a href="#" rel="nofollow noopener"><span>涂博闻</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

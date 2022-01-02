@@ -1,0 +1,490 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+  <title>V8中的JavaScript的内存管理与垃圾回收 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"dunktu.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Dunktu</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg/index.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="V8中的JavaScript的内存管理与垃圾回收">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-24 22:49" pubdate>
+        2021年12月24日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      18
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">V8中的JavaScript的内存管理与垃圾回收</h1>
+            
+            <div class="markdown-body">
+              <h1 id="一-内存的生命周期"><a href="#一-内存的生命周期" class="headerlink" title="一.内存的生命周期"></a>一.内存的生命周期</h1><p>无论任何语言，内存生命周期大体一致，会分为：分配内存，使用内存，销毁内存三个阶段</p>
+<p><img src="/images/pasted-3.png" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
+<h2 id="1-分配"><a href="#1-分配" class="headerlink" title="1.分配"></a>1.分配</h2><p><strong>1.1静态内存分配</strong></p>
+<p><strong>1.2动态内存分配</strong></p>
+<p>区别：<br><strong>静态内存分配：</strong></p>
+<ul>
+<li>数据大小在编译的时候必须是已知的</li>
+<li>在编译时执行</li>
+<li>分配给栈</li>
+<li>先进后出 </li>
+</ul>
+<p><img src="/images/pasted-4.png" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
+<h2 id="2-使用"><a href="#2-使用" class="headerlink" title="2.使用"></a>2.使用</h2><p>读写基本变量或对象的属性、传参等操作，都涉及到了内存的使用。</p>
+<h2 id="3-释放"><a href="#3-释放" class="headerlink" title="3.释放"></a>3.释放</h2><p>对于不再使用的内存，应当及时释放。</p>
+<hr>
+<h1 id="二-V8的内存结构"><a href="#二-V8的内存结构" class="headerlink" title="二.V8的内存结构"></a>二.V8的内存结构</h1><p>正在运行的程序由某些内存表示，这些内存成为常驻集<br><img src="/images/pasted-5.png" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
+<h2 id="1-栈内存"><a href="#1-栈内存" class="headerlink" title="1.栈内存"></a>1.栈内存</h2><p>栈用于静态内存分配（Static Memory Allocation），它具有以下特点：</p>
+<ul>
+<li>操作数据快，因为是在栈顶操作</li>
+<li>数据必须是静态的，数据大小在编译时是已知的</li>
+<li>多线程应用程序中，每个线程可以有一个栈</li>
+<li>堆的内存管理简单，且由操作系统完成</li>
+<li>栈大小有限，可能发生栈溢出（Stack Overflow）</li>
+<li>值大小有限制</li>
+</ul>
+<h2 id="2-堆内存"><a href="#2-堆内存" class="headerlink" title="2.堆内存"></a>2.堆内存</h2><p>堆用于动态内存分配（Dynamic Memory Allocation），与栈不同，程序需要使用指针在堆中查找数据。它的特点是：</p>
+<ul>
+<li>操作速度慢，但容量大</li>
+<li>可以将动态大小的数据存储在此处</li>
+<li>堆在应用程序的线程之间共享</li>
+<li>因为堆的动态特性，堆管理起来比较困难</li>
+<li>值大小没有限制</li>
+</ul>
+<p><strong>堆的内存还可以进一步划分：</strong><br>1.<strong>新生代：</strong>空间小，并且分为了两个半空间，由Minor GC管理，其中数据存活期短<br>2.<strong>老生代：</strong>空间大，由Major GC管理，老生代可以进一步划分为：</p>
+<ul>
+<li>旧指针空间：包含的对象中还存在指针，这个指针指向其他对象</li>
+<li>旧数据空间：包含的对象中仅有数据</li>
+</ul>
+<p>3.<strong>大对象空间：</strong>这里对象的大小超过了其他空间大小限制<br>4.<strong>代码空间：</strong>即时编译器在这里存储已编译的代码块<br>5.<strong>元空间、属性元空间、映射空间：</strong>这些空间中的每个空间都包含相同大小的对象，并且对它们指向的对象有某种约束，从而简化了收集。</p>
+<p><strong>（页（Page）：页是从操作系统分配的连续内存块，以上的空间都由一组组的页构成的。）</strong></p>
+<hr>
+<h1 id="三-回收栈内存"><a href="#三-回收栈内存" class="headerlink" title="三.回收栈内存"></a>三.回收栈内存</h1><p>V8会通过移动记录<strong>当前执行状态的指针</strong>来销毁该函数保存在栈中的执行上下文</p>
+<hr>
+<h1 id="四-回收堆内存"><a href="#四-回收堆内存" class="headerlink" title="四.回收堆内存"></a>四.回收堆内存</h1><p>V8中的<strong>垃圾收集器（Garbage Collector）</strong>，它的工作是：跟踪内存的分配和使用，以便当分配的内存不再使用时，自动释放它。并且，这个垃圾收集器是分代的，也就是说，堆中的对象按其年龄分组并在不同阶段清除。</p>
+<p><strong>回收堆内存有两种思路：</strong><br>1.引用计数法<br>2.标记清除法</p>
+<p>在V8中，使用<strong>两个阶段和三种算法</strong>来进行GC：<br>1.<strong>Minor GC：</strong>针对新生代，使用Scavenger和Cheney’s algorithm两种算法<br>2.<strong>Major GC：</strong>针对老生代，使用Mark-Sweep-Compact算法</p>
+<h2 id="两种思路："><a href="#两种思路：" class="headerlink" title="两种思路："></a>两种思路：</h2><p><strong>1.引用计数法：</strong></p>
+<p><strong>内存引用（Memory References）</strong>是引用计数法中的一个重要概念。在内存管理的上下文中，如果一个对象可以隐式或显式访问另一个对象，则称该对象引用另一个对象。 例如，JavaScript对象能够引用其原型（隐式引用）和其属性的值（显式引用）。</p>
+<p>引用计数就是当某个对象的引用计数为0的时候，就把这个对象视为可回收垃圾</p>
+<p><strong>缺点：</strong><br>如果出现循环引用的情况，那么就无法进行垃圾回收了。</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs actionscript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span><span class="hljs-params">()</span> </span>&#123;<br>  <span class="hljs-keyword">var</span> o1 = &#123;&#125;;<br>  <span class="hljs-keyword">var</span> o2 = &#123;&#125;;<br>  o1.p = o2; <span class="hljs-comment">// o1 references o2</span><br>  o2.p = o1; <span class="hljs-comment">// o2 references o1. This creates a cycle.</span><br>&#125;<br><br>f();<br></code></pre></td></tr></table></figure>
+
+<p><img src="/images/pasted-6.png" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
+<p><strong>2.标记清除法</strong><br>标记清除法不再把“对象是否不再被需要”简化为对象是否被引用了，它是从根节点开始寻找节点，并标记可以到达的节点<strong>（标记）</strong>，然后释放没有被标记的节点<strong>（清除）。</strong></p>
+<p><strong>标记清除法解决了循环引用的问题。在之前的示例代码中，函数调用返回之后，两个对象从全局对象出发无法获取。因此，它们将会被垃圾回收器回收。</strong></p>
+<blockquote>
+<p>const和let具有块级作用域，当块级作用域消失的时候就可以及时回收内存，提高程序运行效率</p>
+</blockquote>
+<h2 id="V8-GC的两个步骤"><a href="#V8-GC的两个步骤" class="headerlink" title="V8 GC的两个步骤"></a>V8 GC的两个步骤</h2><h3 id="1-Minor-GC"><a href="#1-Minor-GC" class="headerlink" title="1.Minor GC"></a>1.Minor GC</h3><p>Minor GC是针对新生区的垃圾回收。<br>Minor GC的<strong>整体思路</strong>：（这个过程使用到了Scavenger和Cheney’s algorithm。）</p>
+<ul>
+<li>新生代分为两个半区，分别为“To-Space”和“from-Space”，我们先不断地在from-Space上分配内存</li>
+<li>如果from-Space满了，就触发GC</li>
+<li>找出from-Space上的活动对象，如果这个活动对象存活过两个minor GC周期，就把它移到老生代，否则把它们移到To-Space</li>
+<li>清空from-Space</li>
+<li>转换“To-Space”和“from-Space”的角色</li>
+<li>不断重复上述过程</li>
+</ul>
+<h3 id="2-Major-GC"><a href="#2-Major-GC" class="headerlink" title="2.Major GC"></a>2.Major GC</h3><p>Scavenger算法中需要涉及数据迁移，因此适用于小数据，但老生区的数据较大，因此不宜采用该种方法。</p>
+<p>Major GC针对老生区进行垃圾回收，使用的是Mark-Sweep-Compact算法，<strong>思路</strong>为：</p>
+<ul>
+<li>标记：对堆进行深度优先遍历，标记上所有可到达的对象</li>
+<li>清除：所有未被标记的对象的内存地址均为空闲的内存空间，可以用于存储其他对象</li>
+<li>压缩：将所有存活的对象移到一起，以减少碎片化，并提高为新对象分配内存的性能</li>
+</ul>
+<p><strong>全停顿（stop-the-world GC）</strong>：这种类型的GC方式也被称为全停顿，因为 JavaScript 是运行在主线程之上的，一旦执行垃圾回收算法，都需要将正在执行的 JavaScript 脚本暂停下来，待垃圾回收完毕后再恢复脚本执行，会造成性能的下降。</p>
+<p>V8中采取的解决策略：<br>1.增量式编程：GC是在多个增量步骤中完成的，而不是一次性<br>2.并发标记和并发清理/压缩：使用多个帮助线程并发完成的，而不会影响主线程<br>3.懒清理：指的是延迟处理Page中的垃圾，直到需要内存才进行清理。</p>
+<p><img src="/images/pasted-7.png" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
+<hr>
+<h1 id="五-如何优化内存的使用"><a href="#五-如何优化内存的使用" class="headerlink" title="五.如何优化内存的使用"></a>五.如何优化内存的使用</h1><p>1.不要在循环之中定义函数<br>2.不要在循环中定义对象<br>3.清空数组</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">arr.length</span>=<span class="hljs-number">0</span><span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<p>学习链接：<br><a target="_blank" rel="noopener" href="https://juejin.cn/post/6971245488058302477#heading-6">https://juejin.cn/post/6971245488058302477#heading-6</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/6891614154134667272">https://juejin.cn/post/6891614154134667272</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Javascript/">Javascript</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/12/24/Js%E5%AF%B9%E8%B1%A1%E5%88%A4%E7%A9%BA%E4%B8%8E%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E6%9F%90%E4%B8%AA%E5%B1%9E%E6%80%A7/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Js对象判空与对象是否包含某个属性</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/12/24/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/">
+                        <span class="hidden-mobile">JavaScript常见的内存泄漏</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="#" rel="nofollow noopener"><span>Dunktu</span></a> <i class="iconfont icon-love"></i> <a href="#" rel="nofollow noopener"><span>涂博闻</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

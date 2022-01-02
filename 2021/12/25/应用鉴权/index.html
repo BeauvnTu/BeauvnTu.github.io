@@ -1,0 +1,501 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+  <title>应用鉴权 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"dunktu.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Dunktu</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg/index.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="应用鉴权">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-25 10:23" pubdate>
+        2021年12月25日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      35
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">应用鉴权</h1>
+            
+            <div class="markdown-body">
+              <p>应用鉴权就是当一个用户进入APP时，我们需要判断他所拥有的权利，根据权力来判断他所能进行的一个行为，最为常见的就是购物网站的登录以及购物支付等操作。</p>
+<hr>
+<h1 id="一-鉴权的需求背景"><a href="#一-鉴权的需求背景" class="headerlink" title="一.鉴权的需求背景"></a>一.鉴权的需求背景</h1><p>Http的请求是无状态的，就是说在一个Http请求中的请求方和响应方都是无法维护状态，是一次性的，所以我们就不知道请求前后都发生了什么。所以我们需要标记的功能，而浏览器的sessionStorage，localStorage，全局变量等限制太多，就有了cookie，session，token等鉴权的操作。</p>
+<h1 id="二-cookie"><a href="#二-cookie" class="headerlink" title="二.cookie"></a>二.cookie</h1><p>cookie也是一种前端存储的方式，但是他和sessionStorage，localStorage等本地存储的不同在于，浏览器向服务端发起请求的时候，cooike是自动传过去的，可以做到前端无感知，出错的概率更低<br><strong>过程：</strong><br>1.浏览器向服务器发起请求并传送数据，由服务器接收数据然后设置cooike放进响应头（Set-Cookie），浏览器接收到响应之后就会自动存储进cookie</p>
+<p>2.在之后的每一次请求中浏览器都会自动的在请求头之中设置cookie字段，发送给服务端<br><strong>配置：</strong><br><strong>1.Domain/Path</strong><br>cookie 是要限制空间范围的，通过 Domain（域）/ Path（路径）两级。</p>
+<blockquote>
+<p>Domain属性指定浏览器发出 HTTP 请求时，哪些域名要附带这个 Cookie。如果没有指定该属性，浏览器会默认将其设为当前 URL 的一级域名，比如 <a href="https://link.zhihu.com/?target=http://www.example.com/">www.example.com</a> 会设为 <a href="https://link.zhihu.com/?target=http://example.com/">example.com</a>，而且以后如果访问<a href="https://link.zhihu.com/?target=http://example.com/">example.com</a>的任何子域名，HTTP 请求也会带上这个 Cookie。如果服务器在Set-Cookie字段指定的域名，不属于当前域名，浏览器会拒绝这个 Cookie。<br>Path属性指定浏览器发出 HTTP 请求时，哪些路径要附带这个 Cookie。只要浏览器发现，Path属性是 HTTP 请求路径的开头一部分，就会在头信息里面带上这个 Cookie。比如，PATH属性是/，那么请求/docs路径也会包含该 Cookie。当然，前提是域名必须一致。</p>
+</blockquote>
+<p><strong>2.Expires / Max-Age</strong><br>cookie 还可以限制时间范围，通过 Expires、Max-Age 中的一种。</p>
+<blockquote>
+<p>Expires属性指定一个具体的到期时间，到了指定时间以后，浏览器就不再保留这个 Cookie。它的值是 UTC 格式。如果不设置该属性，或者设为null，Cookie 只在当前会话（session）有效，浏览器窗口一旦关闭，当前 Session 结束，该 Cookie 就会被删除。另外，浏览器根据本地时间，决定 Cookie 是否过期，由于本地时间是不精确的，所以没有办法保证 Cookie 一定会在服务器指定的时间过期。<br>Max-Age属性指定从现在开始 Cookie 存在的秒数，比如60 * 60 * 24 * 365（即一年）。过了这个时间以后，浏览器就不再保留这个 Cookie。<br>如果同时指定了Expires和Max-Age，那么Max-Age的值将优先生效。<br>如果Set-Cookie字段没有指定Expires或Max-Age属性，那么这个 Cookie 就是 Session Cookie，即它只在本次对话存在，一旦用户关闭浏览器，浏览器就不会再保留这个 Cookie。</p>
+</blockquote>
+<p><strong>3.Secure / HttpOnly</strong><br>cookie 可以限制使用方式。</p>
+<blockquote>
+<p>Secure属性指定浏览器只有在加密协议 HTTPS 下，才能将这个 Cookie 发送到服务器。另一方面，如果当前协议是 HTTP，浏览器会自动忽略服务器发来的Secure属性。该属性只是一个开关，不需要指定值。如果通信是 HTTPS 协议，该开关自动打开。<br>HttpOnly属性指定该 Cookie 无法通过 JavaScript 脚本拿到，主要是Document.cookie属性、XMLHttpRequest对象和 Request API 都拿不到该属性。这样就防止了该 Cookie 被脚本读到，只有浏览器发出 HTTP 请求时，才会带上该 Cookie。</p>
+</blockquote>
+<p><strong>Http头对cookie的读写：</strong><br>响应会携带一个Set-Cookie头，一个Set-Cookie只能设置一条cookie，格式为cookie键值+配置键值，如果想要一次设置多个cookie，我们可以多写几个Set-Cookie在头里面。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">Set-Cookie: <span class="hljs-attribute">username</span>=jimu; <span class="hljs-attribute">domain</span>=jimu.com; <span class="hljs-attribute">path</span>=/blog; <span class="hljs-attribute">Expires</span>=Wed, 21 Oct 2015 07:28:00 GMT; Secure; HttpOnly<br></code></pre></td></tr></table></figure>
+<p>而当浏览器请求服务器的时候，就不再需要发送配置内容了，只需要发送键值对就可以</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">Cookie: <span class="hljs-attribute">username</span>=jimu; <span class="hljs-attribute">height</span>=180; <span class="hljs-attribute">weight</span>=80<br></code></pre></td></tr></table></figure>
+<p><strong>前端对cookie的读写操作：</strong><br>如果服务端设置的cookie并没有设置httpOnly,那么我们就可以调用document.cookie来对cookie进行读写操作，但一次调用document.cookie就只能操作一个cookie</p>
+<h1 id="三-session"><a href="#三-session" class="headerlink" title="三.session"></a>三.session</h1><p>在上面我们介绍了cookie，可以了解到cookie其实是浏览器存储的一种实现，可以看作应用鉴权的基石。但是它只是一个存储信息的工具，我们还需要判断其中的信息是不是安全的操作者，这时候我们就需要session了。<br><strong>典型的session登录流程：</strong></p>
+<p><img src="/images/pasted-19.png" srcset="/img/loading.gif" lazyload alt="upload successful"><br>1.浏览器登录发送账号密码，服务端查用户库，校验用户</p>
+<p>2.服务端把用户登录状态存为 Session，生成一个 sessionId</p>
+<p>3.通过登录接口返回，把 sessionId set 到 cookie 上,此后浏览器再请求业务接口，sessionId 随 cookie 带上</p>
+<p>4.服务端查 sessionId 校验 session</p>
+<p>5.成功后正常做业务处理，返回结果</p>
+<p><strong>session的存储与过期销毁：</strong><br>由于session是用来验证的，所以服务端仅仅只是给浏览器的cookie中添加一个sessionid，所以也需要自己保存一下，存储的方式：</p>
+<p>1.Redis（推荐）：内存型数据库，redis中文官方网站。以 key-value 的形式存，正合 sessionId-sessionData 的场景；且访问快。</p>
+<p>2.内存：直接放到变量里。一旦服务重启就没了</p>
+<p>3.数据库：普通数据库。性能不高。</p>
+<p>而session也可以手动设置过期时间，一到过期时间就直接清空存储的内存就好了</p>
+<p><strong>session的分布式问题：</strong><br>由于服务端是集群，而用户请求过来会走一次负载均衡，不一定会打到哪台机器上。一旦用户后续接口请求到的机器和他登录请求的机器不一样，或者登录请求的机器出问题了，那session就会失效。<br>常见的解决方式：</p>
+<p>1.把session集中存储到独立的redis或者普通数据库中，就可以把session存储到一个库里（<strong>存储角度</strong>）</p>
+<p>2.让相同 IP 的请求在负载均衡时都打到同一台机器上。以 nginx 为例，可以配置 ip_hash 来实现。（<strong>分布角度</strong>）</p>
+<h1 id="四-token"><a href="#四-token" class="headerlink" title="四.token"></a>四.token</h1><p><img src="/images/pasted-20.png" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
+<blockquote>
+<p>1.用户登录，服务端校验账号密码，获得用户信息</p>
+</blockquote>
+<p>2.把用户信息、token 配置编码成 token，通过 cookie set 到浏览器</p>
+<p>3.此后用户请求业务接口，通过 cookie 携带 token</p>
+<p>4.接口校验 token 有效性，进行正常业务接口处理</p>
+<p>目前主流的token存储还是在cookie中进行，但是为了防止伪造token造成的安全问题，我们还需要一些加密算法来生成签名，来保证数据安全性</p>
+<p><img src="/images/pasted-21.png" srcset="/img/loading.gif" lazyload alt="upload successful"><br><strong>JWT</strong><br>由于以上的方法增加了cookie的数量，所以JSON web Token得以被使用。</p>
+<p><img src="/images/pasted-22.png" srcset="/img/loading.gif" lazyload alt="upload successful"><br><strong>refresh token</strong><br>token，作为权限守护者，最重要的就是「安全」。</p>
+<p>业务接口用来鉴权的 token，我们称之为 access token。越是权限敏感的业务，我们越希望 access token 有效期足够短，以避免被盗用。但过短的有效期会造成 access token 经常过期，过期后怎么办呢？</p>
+<p>一种办法是，让用户重新登录获取新 token，显然不够友好，要知道有的 access token 过期时间可能只有几分钟。</p>
+<p>另外一种办法是，再来一个 token，一个专门生成 access token 的 token，我们称为 refresh token。</p>
+<p>1.access token 用来访问业务接口，由于有效期足够短，盗用风险小，也可以使请求方式更宽松灵活</p>
+<p>2.refresh token 用来获取 access token，有效期可以长一些，通过独立服务和严格的请求方式增加安全性；由于不常验证，也可以如前面的 session 一样处理</p>
+<p><img src="/images/pasted-23.png" srcset="/img/loading.gif" lazyload alt="upload successful"><br>如果refresh token过期了，就只能重新登陆了。</p>
+<h1 id="五-session与token对比"><a href="#五-session与token对比" class="headerlink" title="五.session与token对比"></a>五.session与token对比</h1><p><strong>客户端存cookie与存放于其他地方</strong></p>
+<p>1.出了浏览器环境之外就没有cookie了；</p>
+<p>2.cookie是浏览器在域下自动携带的。很容易引发CSFR攻击</p>
+<p>存放在别的地方可以解决部分问题<br><strong>服务端存储数据于不存</strong></p>
+<p>1.存数据的话可以缩短认证字符串的长度，减小请求体积</p>
+<p>2.不存数据就不会出现分布式处理的问题，降低硬件成本，避免查库带来的验证延迟</p>
+<h1 id="六-单点登录"><a href="#六-单点登录" class="headerlink" title="六.单点登录"></a>六.单点登录</h1><p>前面我们已经知道了，在同域下的客户端/服务端认证系统中，通过客户端携带凭证，维持一段时间内的登录状态。</p>
+<p>但当我们业务线越来越多，就会有更多业务系统分散到不同域名下，就需要「一次登录，全线通用」的能力，叫做「单点登录」。</p>
+<p>在<strong>主域名相同</strong>的情况下，就可以直接把cookie设置为主域名就可以实现了。</p>
+<p>如果<strong>主域名不同</strong>，我们就需要独立的认证服务，称为SSO。</p>
+<p><img src="/images/pasted-24.png" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
+<ul>
+<li>用户进入 A 系统，没有登录凭证（ticket），A 系统给他跳到 SSO</li>
+<li>SSO 没登录过，也就没有 sso 系统下没有凭证（注意这个和前面 A ticket 是两回事），输入账号密码登录</li>
+<li>SSO 账号密码验证成功，通过接口返回做两件事：一是种下 sso 系统下凭证（记录用户在 SSO 登录状态）；二是下发一个 ticket</li>
+<li>客户端拿到 ticket，保存起来，带着请求系统 A 接口</li>
+<li>系统 A 校验 ticket，成功后正常处理业务请求</li>
+<li>此时用户第一次进入系统 B，没有登录凭证（ticket），B 系统给他跳到 SSO</li>
+<li>SSO 登录过，系统下有凭证，不用再次登录，只需要下发 ticket</li>
+<li>客户端拿到 ticket，保存起来，带着请求系统 B 接口</li>
+</ul>
+<p>如果是在浏览器之下实现，我们需要考虑其他的东西</p>
+<p><img src="/images/pasted-25.png" srcset="/img/loading.gif" lazyload alt="upload successful"><br>对浏览器来说，SSO 域下返回的数据要怎么存，才能在访问 A 的时候带上？浏览器对跨域有严格限制，cookie、localStorage 等方式都是有域限制的。</p>
+<p>这就需要也只能由 A 提供 A 域下存储凭证的能力。一般我们是这么做的：</p>
+<p><img src="/images/pasted-26.png" srcset="/img/loading.gif" lazyload alt="upload successful"><br>图中我们通过颜色把浏览器当前所处的域名标记出来。注意图中灰底文字说明部分的变化。</p>
+<ul>
+<li>1.在 SSO 域下，SSO 不是通过接口把 ticket 直接返回，而是通过一个带 code 的 URL 重定向到系统 A 的接口上，这个接口通常在 A 向 SSO 注册时约定</li>
+<li>2.浏览器被重定向到 A 域下，带着 code 访问了 A 的 callback 接口，callback 接口通过 code 换取 ticket</li>
+<li>3.这个 code 不同于 ticket，code 是一次性的，暴露在 URL 中，只为了传一下换 ticket，换完就失效</li>
+<li>4.callback 接口拿到 ticket 后，在自己的域下 set cookie 成功</li>
+<li>5.在后续请求中，只需要把 cookie 中的 ticket 解析出来，去 SSO 验证就好</li>
+<li>6.访问 B 系统也是一样</li>
+</ul>
+<h1 id="七-总结"><a href="#七-总结" class="headerlink" title="七.总结"></a>七.总结</h1><p>1.HTTP 是无状态的，为了维持前后请求，需要前端存储标记</p>
+<p>2.cookie 是一种完善的标记方式，通过 HTTP 头或 js 操作，有对应的安全策略，是大多数状态管理方案的基石</p>
+<p>3.session 是一种状态管理方案，前端通过 cookie 存储 id，后端存储数据，但后端要处理分布式问题</p>
+<p>4.token 是另一种状态管理方案，相比于 session 不需要后端存储，数据全部存在前端，解放后端，释放灵活性</p>
+<p>5.token 的编码技术，通常基于 base64，或增加加密算法防篡改，jwt 是一种成熟的编码方案</p>
+<p>6.在复杂系统中，token 可通过 service token、refresh token 的分权，同时满足安全性和用户体验</p>
+<p>7.session 和 token 的对比就是「用不用cookie」和「后端存不存」的对比</p>
+<p>8.单点登录要求不同域下的系统「一次登录，全线通用」，通常由独立的 SSO 系统记录登录状态、下发 ticket，各业务系统配合存储和认证 ticket</p>
+<hr>
+<p>阅读知乎文章：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/395273289">鉴权必须了解的5个兄弟：cookie、session、token、jwt、单点登录 - 知乎 (zhihu.com)</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%9C%BA%E6%99%AF%E5%BA%94%E7%94%A8/">场景应用</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/12/25/Form-Data%E4%B8%8ERequest-Payload%E7%9A%84%E5%8C%BA%E5%88%AB/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Form Data与Request Payload的区别</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/12/25/JSONP%E8%AF%A6%E8%A7%A3/">
+                        <span class="hidden-mobile">JSONP详解</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="#" rel="nofollow noopener"><span>Dunktu</span></a> <i class="iconfont icon-love"></i> <a href="#" rel="nofollow noopener"><span>涂博闻</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

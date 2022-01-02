@@ -1,0 +1,509 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+  <title>Ajax - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"dunktu.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Dunktu</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg/index.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Ajax">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-25 01:31" pubdate>
+        2021年12月25日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      12
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Ajax</h1>
+            
+            <div class="markdown-body">
+              <p>前言：之前做了一个vue移动端的小案例，在这个案例之前呢，我是只会使用axios来在前端进行网络请求，对计算机网络知识也是什么都不懂，这时问题就出现了，我在提交用户选择的表单数据的时候，先是出现了跨域请求，然后又报错500，搞得我手足无措的，所以这两天赶紧学习一下ajax来充充电。</p>
+<hr>
+<h1 id="一-Ajax技术的核心"><a href="#一-Ajax技术的核心" class="headerlink" title="一.Ajax技术的核心"></a>一.Ajax技术的核心</h1><p><strong>XMLHttpRequest对象（简称XHR）</strong></p>
+<h1 id="二-Ajax技术的优点："><a href="#二-Ajax技术的优点：" class="headerlink" title="二.Ajax技术的优点："></a>二.Ajax技术的优点：</h1><p><strong>1.无需刷新页面而与服务器进行通讯</strong></p>
+<p><strong>2.允许根据用户事件更新部分内容</strong></p>
+<h1 id="三-Ajax技术的缺点"><a href="#三-Ajax技术的缺点" class="headerlink" title="三.Ajax技术的缺点"></a>三.Ajax技术的缺点</h1><p><strong>1.没有浏览历史，不能回退</strong></p>
+<p><strong>2.存在跨域问题</strong></p>
+<p><strong>3.SEO不友好</strong></p>
+<h1 id="四-XMLHttpRequest对象"><a href="#四-XMLHttpRequest对象" class="headerlink" title="四.XMLHttpRequest对象"></a>四.XMLHttpRequest对象</h1><h2 id="原生JS创建XHR对象（兼容ie7一下版本）"><a href="#原生JS创建XHR对象（兼容ie7一下版本）" class="headerlink" title="原生JS创建XHR对象（兼容ie7一下版本）"></a>原生JS创建XHR对象（兼容ie7一下版本）</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 兼容IE早期版本，建立一个XMLHttpRequest对象</span><br>     <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createXHR</span>(<span class="hljs-params"></span>) </span>&#123;<br>         <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> XMLHttpRequest != <span class="hljs-string">&quot;undefined&quot;</span>) &#123;<br>             <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> XMLHttpRequest();<br>         &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> ActiveXObject != <span class="hljs-string">&quot;undefined&quot;</span>) &#123;<br>             <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">arguments</span>.callee.activeXString != <span class="hljs-string">&quot;string&quot;</span>) &#123;<br>                 <span class="hljs-keyword">var</span> versions = [<span class="hljs-string">&quot;MSXML2.XMLHttp.6.0&quot;</span>, <span class="hljs-string">&quot;MSXML2.XMLHttp.3.0&quot;</span>,<br>                             <span class="hljs-string">&quot;MSXML2.XMLHttp&quot;</span>],<br>                         i, len;<br> <br>                 <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len = versions.length; i &lt; len; i++) &#123;<br>                     <span class="hljs-keyword">try</span> &#123;<br>                         <span class="hljs-keyword">new</span> ActiveXObject(versions[i]);<br>                         <span class="hljs-built_in">arguments</span>.callee.activeXString = versions[i];<br>                         <span class="hljs-keyword">break</span>;<br>                     &#125; <span class="hljs-keyword">catch</span> (ex) &#123;<br>                         <span class="hljs-comment">//可放入提示文字</span><br>                     &#125;<br>                 &#125;<br>             &#125;<br> <br>             <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ActiveXObject(<span class="hljs-built_in">arguments</span>.callee.activeXString);<br>         &#125; <span class="hljs-keyword">else</span> &#123;<br>             <span class="hljs-comment">// 没有XHR对象可用，抛出错误</span><br>             <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;No XHR object available.&quot;</span>);<br>         &#125;<br>     &#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="XHR的用法"><a href="#XHR的用法" class="headerlink" title="XHR的用法"></a>XHR的用法</h2><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p><strong>1.创建XHR变量</strong></p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-keyword">let</span> http = <span class="hljs-keyword">new</span> <span class="hljs-constructor">XMLHttpRequest()</span>;<br></code></pre></td></tr></table></figure>
+<p><strong>2.使用open方法配置</strong></p>
+<p><strong>open方法接受三个参数：要发送的请求类型（GET、POST等），请求的URL，表示是否异步发送请求的布尔值</strong></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">http.<span class="hljs-keyword">open</span>(<span class="hljs-string">&#x27;GET&#x27;</span> , <span class="hljs-string">&#x27;/api/test.php?name=wang&#x27;</span> , <span class="hljs-literal">true</span>);<br></code></pre></td></tr></table></figure>
+
+<p><strong>3.通过send方法提交</strong></p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">http.send()<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="XHR对象的属性"><a href="#XHR对象的属性" class="headerlink" title="XHR对象的属性"></a>XHR对象的属性</h3><p><strong>在收到响应之后，响应的数据会自动填充XHR对象</strong></p>
+<p><strong>1.responseText：作为响应主体被返回的文本</strong></p>
+<p><strong>2.responseXML：如果响应的内容类型是’text/xml’或者’application/xml’,这个属性中将保存包含着响应数据的HTTP状态</strong></p>
+<p><strong>3.status：HTTP状态的说明</strong></p>
+<p><strong>4.statusText：HTTP状态说明</strong></p>
+<h3 id="XHR的readyState属性"><a href="#XHR的readyState属性" class="headerlink" title="XHR的readyState属性"></a>XHR的readyState属性</h3><p><strong>0：未初始化。尚未调用open方法</strong></p>
+<p><strong>1：启动。已经调用open方法，尚未调用send方法</strong></p>
+<p><strong>2：发送。已经调用send方法，但尚未接受数据</strong></p>
+<p><strong>3：接收。已经接收到部分响应数据</strong></p>
+<p><strong>4：完成。已经接受到全部响应数据，而且已经可以在客户端使用</strong></p>
+<h3 id="取消网络请求"><a href="#取消网络请求" class="headerlink" title="取消网络请求"></a>取消网络请求</h3><p><strong>调用abort()方法来取消异步请求，调用这个方法之后xhr对象会停止触发事件，而且也不再允许访问任何与响应有关的对象属性，在终止请求之后，还应该对XHR对象进行解除引用操作。由于内存原因，不建议重用XHR对象</strong></p>
+<h1 id="五-状态码详解"><a href="#五-状态码详解" class="headerlink" title="五.状态码详解"></a>五.状态码详解</h1><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>信息</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td>表示响应结果请求被正常处理了</td>
+</tr>
+<tr>
+<td>204</td>
+<td>表示请求资源成功，但是没有资源可以返回</td>
+</tr>
+<tr>
+<td>206</td>
+<td>表示请求资源的某一部分，响应中包含content-range</td>
+</tr>
+<tr>
+<td>301</td>
+<td>表示资源的访问路径(URL)被变更</td>
+</tr>
+<tr>
+<td>302</td>
+<td>表示请求的资源已经在其他位置了，但是默认你已经知道了</td>
+</tr>
+<tr>
+<td>303</td>
+<td>表示请求的资源已经在其他位置了，应使用 GET 方法定向获取请求的资源</td>
+</tr>
+<tr>
+<td>304</td>
+<td>表示资源已经请求到到了，但是未能按照正常的方式请求</td>
+</tr>
+<tr>
+<td>307</td>
+<td>临时重定向</td>
+</tr>
+<tr>
+<td>400</td>
+<td>请求报文中存在语法错误，需要修改请求内容重新请求</td>
+</tr>
+<tr>
+<td>401</td>
+<td>需要通过http认证，若之前已进行过 1 次请求，则表示用 户认证失败</td>
+</tr>
+<tr>
+<td>403</td>
+<td>服务器拒绝你的的访问</td>
+</tr>
+<tr>
+<td>404</td>
+<td>服务器上没有请求的资源，可能是地址写错了……</td>
+</tr>
+<tr>
+<td>405</td>
+<td>客户端的请求方法被服务器禁止</td>
+</tr>
+<tr>
+<td>500</td>
+<td>服务器资源发生了错误</td>
+</tr>
+<tr>
+<td>503</td>
+<td>服务器无法请求</td>
+</tr>
+<tr>
+<td>总结</td>
+<td>2xx为请求成功，3xx为URL被改变了，4xx客户端错误，5xx服务器错误</td>
+</tr>
+</tbody></table>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/12/25/Fetch/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Fetch</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/12/25/Webpack%E6%A6%82%E8%BF%B0/">
+                        <span class="hidden-mobile">Webpack概述</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="#" rel="nofollow noopener"><span>Dunktu</span></a> <i class="iconfont icon-love"></i> <a href="#" rel="nofollow noopener"><span>涂博闻</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

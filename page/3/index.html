@@ -1,0 +1,758 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+  <title>Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"dunktu.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Dunktu</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg/index.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Dunktu的个人空间">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/12/24/JS%E5%8E%9F%E7%94%9FBackground-Tasks/" target="_self">
+          JS原生Background Tasks
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/12/24/JS%E5%8E%9F%E7%94%9FBackground-Tasks/" target="_self">
+          
+          
+            
+          
+          一.window.requestIdleCallback1.作用：这个方法将会在浏览器的空闲时间调用函数排队。这样可以使操作者在主事件循环上执行后台和低优先级工作，而不会影响延迟关键事件，比如动画和输入响应，函数一般会按照先进先执行的顺序进行调用，但是如果设置了timeout（超时执行时间），将会导致为了在超时之前执行相应的函数操作而打乱执行顺序。
+2.使用方法window.requestIdle
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-24 23:22" pubdate>
+              2021-12-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Javascript/">Javascript</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/12/24/documentFragment%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/" target="_self">
+          documentFragment深入理解
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/12/24/documentFragment%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/" target="_self">
+          
+          
+            
+          
+          先搬一段官方的描述：DocumentFragment 表示一个没有父级文件的最小文档对象。它被当做一个轻量版的 Document 使用，用于存储已排好版的或尚未打理好格式的XML片段。最大的区别是因为DocumentFragment不是真实DOM树的一部分，它的变化不会引起DOM树的重新渲染的操作(reflow) ，且不会导致性能等问题。DocumentFragment 接口表示文档的一部分（或一
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-24 23:18" pubdate>
+              2021-12-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Javascript/">Javascript</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/12/24/Js%E5%AF%B9%E8%B1%A1%E5%88%A4%E7%A9%BA%E4%B8%8E%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E6%9F%90%E4%B8%AA%E5%B1%9E%E6%80%A7/" target="_self">
+          Js对象判空与对象是否包含某个属性
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/12/24/Js%E5%AF%B9%E8%B1%A1%E5%88%A4%E7%A9%BA%E4%B8%8E%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E6%9F%90%E4%B8%AA%E5%B1%9E%E6%80%A7/" target="_self">
+          
+          
+            
+          
+          对象判空1.将对象转换为JSON字符串，判断是否为‘{}’
+1var b =data=&gt; (JSON.stringify(data) == &quot;&#123;&#125;&quot;);
+2.for in循环对象
+1234var b =data=&gt; &#123;for(var key in data)&#123;return false;&#125;return true&#12
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-24 23:13" pubdate>
+              2021-12-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Javascript/">Javascript</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/12/24/V8%E4%B8%AD%E7%9A%84JavaScript%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" target="_self">
+          V8中的JavaScript的内存管理与垃圾回收
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/12/24/V8%E4%B8%AD%E7%9A%84JavaScript%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" target="_self">
+          
+          
+            
+          
+          一.内存的生命周期无论任何语言，内存生命周期大体一致，会分为：分配内存，使用内存，销毁内存三个阶段
+
+1.分配1.1静态内存分配
+1.2动态内存分配
+区别：静态内存分配：
+
+数据大小在编译的时候必须是已知的
+在编译时执行
+分配给栈
+先进后出 
+
+
+2.使用读写基本变量或对象的属性、传参等操作，都涉及到了内存的使用。
+3.释放对于不再使用的内存，应当及时释放。
+
+二.V8的内存结构正在运行的程序由某
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-24 22:49" pubdate>
+              2021-12-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Javascript/">Javascript</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/12/24/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/" target="_self">
+          JavaScript常见的内存泄漏
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/12/24/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/" target="_self">
+          
+          
+            
+          
+          一.什么是内存泄漏当应用程序不再需要的内存，由于某种原因未返回给操作系统或者空闲内存，这将会导致程序变慢、卡顿、高延迟
+二.内存泄漏的主要原因JavaScript内存泄漏的主要原因在于一些不再需要的引用（Unwanted References）。
+所谓的Unwanted References指的是：有一些内存，其实开发人员已经不再需要了，但是由于某种原因，这些内存仍然被标记并保留在活动根目录树中。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-24 22:46" pubdate>
+              2021-12-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Javascript/">Javascript</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/12/24/Vue-Router%E4%B8%A4%E7%A7%8D%E8%B7%AF%E7%94%B1%E6%A8%A1%E5%BC%8F/" target="_self">
+          Vue Router两种路由模式
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/12/24/Vue-Router%E4%B8%A4%E7%A7%8D%E8%B7%AF%E7%94%B1%E6%A8%A1%E5%BC%8F/" target="_self">
+          
+          
+            
+          
+          hash模式在hash模式下，本质上是通过修改window.location.href实现的。前端路由的改变依托于**#锚点，而锚点后边的值我们可以通过修改window.location.hash**的值来修改，每一次hash值的变化都会导致触发hashchange这个事件，很重要的一点就是，这样修改页面不会刷新，不会导致浏览器向后端发送请求
+12345window.onhashchange = 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-24 22:38" pubdate>
+              2021-12-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Vue/">Vue</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/12/24/Vue%E4%B8%ADArray%E7%9A%84%E5%8F%98%E5%8C%96%E4%BE%A6%E6%B5%8B/" target="_self">
+          Vue中Array的变化侦测
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/12/24/Vue%E4%B8%ADArray%E7%9A%84%E5%8F%98%E5%8C%96%E4%BE%A6%E6%B5%8B/" target="_self">
+          
+          
+            
+          
+          前言：之前介绍了Vue中Object的变化侦测，Array中的变化侦测和Object中变化侦测还是有一定的不同的，这一篇就来学习一下。
+
+1.Object与Array变化侦测的不同Array.push()方法实际上并不会调用getter/setter，并且在ES6之前JS并没有元编程的能力，无法拦截原型方法，而每一个数组实例调用push等方法都是调用的原型上的方法，所以为了追踪变化我们必须使用一个
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-24 22:35" pubdate>
+              2021-12-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Vue/">Vue</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/12/24/Vue%E8%B7%B3%E8%BD%AC%E8%B7%AF%E7%94%B1%E5%92%8C%E9%A1%B5%E9%9D%A2%E6%97%B6%E7%9A%84%E4%BC%A0%E5%8F%82/" target="_self">
+          Vue跳转路由和页面时的传参
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/12/24/Vue%E8%B7%B3%E8%BD%AC%E8%B7%AF%E7%94%B1%E5%92%8C%E9%A1%B5%E9%9D%A2%E6%97%B6%E7%9A%84%E4%BC%A0%E5%8F%82/" target="_self">
+          
+          
+            
+          
+          前言：这个问题是我之前做的一个移动端练手小demo时出现的问题，需求是最后点击另一个路由上的提交按钮时，将之前路由用户选择的数据提交给后台，我想不到别的方法，最终在这么一个小demo中使用了vuex，下面是我看其他博客总结的一些方法
+
+1.路由传值12345678// 字符串router.push(&#x27;home&#x27;)// 对象router.push(&#123; path: &#x
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-24 22:31" pubdate>
+              2021-12-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Vue/">Vue</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/12/24/setInterval%E5%92%8CsetTimeout%E7%9A%84%E5%9D%91/" target="_self">
+          setInterval和setTimeout的坑
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/12/24/setInterval%E5%92%8CsetTimeout%E7%9A%84%E5%9D%91/" target="_self">
+          
+          
+            
+          
+          之前使用setInterval进行一个前端轮询的操作，结果把网站卡崩了，来总结一下setInterval和setTimeout的坑
+
+一.setInterval的坑
+setInterval会无视代码错误。就算代码中遇到了错误，它还是会一直循环下去，如果代码中有错误代码，setInterval就会导致这个错误被隐藏123456let count = 1;setInterval(function ()
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-24 22:27" pubdate>
+              2021-12-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Javascript/">Javascript</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/06/06/Vue%E4%B8%ADObject%E7%9A%84%E5%8F%98%E5%8C%96%E4%BE%A6%E6%B5%8B/" target="_self">
+          Vue中Object的变化侦测
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/06/06/Vue%E4%B8%ADObject%E7%9A%84%E5%8F%98%E5%8C%96%E4%BE%A6%E6%B5%8B/" target="_self">
+          
+          
+            
+          
+          前言：最近在阅读深入浅出vue这本书，对Vue的响应式原理中变化侦测有了进一步的理解。
+
+一.什么是变化侦测我们在解释一个东西之前必须先搞清楚这个东西到底是什么，页面渲染的时候需要与数据有所交互，而当用户操作的时候这些数据是会发生变化的，当数据变化的同时为了用户和程序的良好交流，我们必须立即将改变的数据渲染到页面上，而Vue这个框架就很好的做到了这一点。
+二.如何侦测Object变化1.数据劫持2
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-06-06 10:03" pubdate>
+              2021-06-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Vue/">Vue</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="#" rel="nofollow noopener"><span>Dunktu</span></a> <i class="iconfont icon-love"></i> <a href="#" rel="nofollow noopener"><span>涂博闻</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

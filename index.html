@@ -158,21 +158,29 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/06/06/Vue%E4%B8%ADObject%E7%9A%84%E5%8F%98%E5%8C%96%E4%BE%A6%E6%B5%8B/" target="_self">
-          Vue中Object的变化侦测
+        <a href="/2021/12/25/%E7%BD%91%E9%A1%B5%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%B3%95%E6%A6%82%E8%BF%B0/" target="_self">
+          网页性能优化的方法概述
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/06/06/Vue%E4%B8%ADObject%E7%9A%84%E5%8F%98%E5%8C%96%E4%BE%A6%E6%B5%8B/" target="_self">
+        <a href="/2021/12/25/%E7%BD%91%E9%A1%B5%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%B3%95%E6%A6%82%E8%BF%B0/" target="_self">
           
           
             
           
-          前言：最近在阅读深入浅出vue这本书，对Vue的响应式原理中变化侦测有了进一步的理解。
+          网页性能优化的9个方法合并操作
 
-一.什么是变化侦测我们在解释一个东西之前必须先搞清楚这个东西到底是什么，页面渲染的时候需要与数据有所交互，而当用户操作的时候这些数据是会发生变化的，当数据变化的同时为了用户和程序的良好交流，我们必须立即将改变的数据渲染到页面上，而Vue这个框架就很好的做到了这一点。
-二.如何侦测Object变化1.数据劫持2
+ DOM的多个读写操作（或多个写操作），应该放在一起。不要两个读操作之间加入一个写操作。
+不要一条条的改变样式，而要通过改变class，或者csstext属性，一次性的改变样式
+
+缓存
+
+如果某个样式是通过重排得到的，那么最好缓存结果。避免下一次用到的时候，浏览器又要重排
+
+操作非真实DOM
+
+尽量使用离线DOM，而不是真实的网面dom，来改变元素样式。（比如，操
         </a>
       </p>
 
@@ -180,8 +188,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-06 10:03" pubdate>
-              2021-06-06
+            <time datetime="2021-12-25 11:29" pubdate>
+              2021-12-25
             </time>
           </div>
         
@@ -189,7 +197,7 @@
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Vue/">Vue</a>
+              <a href="/categories/%E5%9C%BA%E6%99%AF%E5%BA%94%E7%94%A8/">场景应用</a>
             
           </div>
         
@@ -204,21 +212,26 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/06/06/VueRouter%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/" target="_self">
-          VueRouter路由守卫
+        <a href="/2021/12/25/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E4%B8%AD%E5%AF%BC%E8%87%B4%E9%A1%B5%E9%9D%A2%E5%8D%A1%E9%A1%BF%E7%9A%84%E5%9B%A0%E7%B4%A0/" target="_self">
+          前端开发中导致页面卡顿的因素
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/06/06/VueRouter%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/" target="_self">
+        <a href="/2021/12/25/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E4%B8%AD%E5%AF%BC%E8%87%B4%E9%A1%B5%E9%9D%A2%E5%8D%A1%E9%A1%BF%E7%9A%84%E5%9B%A0%E7%B4%A0/" target="_self">
           
           
             
           
-          前言：最近学习一个商城项目的时候出现了一个请求，就是当我点击个人主页的时候，如果已经登陆并且没有超时的情况下会跳转到个人中心，但是如果没有登陆，或者登录超时了，那么就会跳转到登录界面，需要完成这个需求我们就必须使用路由守卫。
-1.路由守卫是什么？路由守卫简单的来说就是路由在跳转的时候所触发的一些钩子函数
-2.导航守卫的分类1）全局前置守卫——发生在路由跳转前
-当一个导航触发时，全局前置守卫按照创建
+          之前在做实习的一个项目的时候碰到了一个让我抓狂的BUG，需求是让我实现一个实时刷新获取消息列表的功能，但是后台返回的接口数据是成百上千的，页面卡的不得了，笔记本的风扇都呼呼的，所以这篇博客是为了总结一下导致页面卡顿的原因。
+
+一.页面卡顿的原因大体上可以分为两种类型1.渲染不及时，页面掉帧
+
+长时间占用js线程
+页面回流和重绘较多
+资源加载堵塞
+
+我觉得这就是我上次碰到的哪个问题的原因，每一次请求
         </a>
       </p>
 
@@ -226,8 +239,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-06 00:14" pubdate>
-              2021-06-06
+            <time datetime="2021-12-25 11:25" pubdate>
+              2021-12-25
             </time>
           </div>
         
@@ -235,7 +248,7 @@
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Vue/">Vue</a>
+              <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a>
             
           </div>
         
@@ -250,21 +263,19 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/06/05/%E5%85%B3%E4%BA%8EReact%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0%E4%B8%ADthis%E7%9A%84%E6%8C%87%E5%90%91%E9%97%AE%E9%A2%98/" target="_self">
-          关于React事件处理函数中this的指向问题
+        <a href="/2021/12/25/%E9%A1%B5%E9%9D%A2%E9%87%8D%E7%BB%98%E4%B8%8E%E5%9B%9E%E6%B5%81/" target="_self">
+          页面重绘与回流
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/06/05/%E5%85%B3%E4%BA%8EReact%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0%E4%B8%ADthis%E7%9A%84%E6%8C%87%E5%90%91%E9%97%AE%E9%A2%98/" target="_self">
+        <a href="/2021/12/25/%E9%A1%B5%E9%9D%A2%E9%87%8D%E7%BB%98%E4%B8%8E%E5%9B%9E%E6%B5%81/" target="_self">
           
           
             
           
-          问题出现：我们在给比如按钮绑定点击事件函数的时候，我们在事件函数中使用this的时候会报错，这是由于this.xxx是undefined。
-通过阅读了几篇博客之后我明白这并不是React这个框架的原因，这是JS的一个机制问题。
-问题分析：我们之前所知道的是，JS中对象调用方法的时候，方法中的this指向的是调用对象
-1234567let obj = &#123;    tmp:&#x27;Yes!
+          一.什么是页面的重绘与回流浏览器在渲染一个页面的时候，从加载到完成，首先是构建DOM树，然后根据DOM节点的几何属性生成渲染树（不包括display:none,head节点但是会包括visibility:hidden节点），当渲染树构建完成，页面就根据DOM树开始布局了，渲染树也根据设置的样式对应的渲染这些节点。在这个过程中，回流与dom树和渲染树有关，重绘与渲染树有关。
+比如我们删除一个dom节
         </a>
       </p>
 
@@ -272,8 +283,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-05 22:50" pubdate>
-              2021-06-05
+            <time datetime="2021-12-25 11:07" pubdate>
+              2021-12-25
             </time>
           </div>
         
@@ -281,7 +292,332 @@
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/React/">React</a>
+              <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/12/25/Css%E6%A6%82%E8%BF%B0/" target="_self">
+          Css概述
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/12/25/Css%E6%A6%82%E8%BF%B0/" target="_self">
+          
+          
+            
+          
+          前言：我把CSS样式的一些基础知识总结了一下，作为自己的复习
+
+1.内联与块内联元素：内联元素不会占用一整行，他只会占用他自己元素大小的空间块级元素：会独占一行的元素，无论他的内容有多少他都会独占一整行a元素可以包含除了他本身以外的任意元素，p元素不能包含其他任何块元素
+2.CSS选择器
+
+
+选择器
+语法
+
+
+
+元素选择器
+标签名{}
+
+
+id选择器
+#id属性值{}
+
+
+类选择器
+.class属
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-25 10:53" pubdate>
+              2021-12-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Css/">Css</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/12/25/cookie/" target="_self">
+          Cookie与Webstorage
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/12/25/cookie/" target="_self">
+          
+          
+            
+          
+          基本概念cookie是往返于客户端与服务端的一小段存储信息，由响应头的Set-cookie设置，客户端浏览器在接收到响应之后就会在cookie中存储配置信息与数据，并且在向服务端发起请求的时候都会在请求头中带上这一段cookie传给服务端。
+
+LocalStorage是WebStorage的一种，可以在浏览器中长期保存的一种本地存储类型，除非被清除，或者设定的过期时间到了，否则会一直保存在浏览器中
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-25 10:51" pubdate>
+              2021-12-25
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/12/25/Form-Data%E4%B8%8ERequest-Payload%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
+          Form Data与Request Payload的区别
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/12/25/Form-Data%E4%B8%8ERequest-Payload%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
+          
+          
+            
+          
+          前端向后端发起get请求的时候,get会把传递的参数拼接在url的后面,所以get请求一般适用于数据量不大的情况之下,在数据量比较大的时候,我们就需要选择Post请求的方式了.
+方式一:Form Data形式当POST请求的请求头里设置Content-Type: application/x-www-form-urlencoded(默认), 参数在请求体以标准的Form Data的形式提交，以&am
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-25 10:48" pubdate>
+              2021-12-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/12/25/%E5%BA%94%E7%94%A8%E9%89%B4%E6%9D%83/" target="_self">
+          应用鉴权
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/12/25/%E5%BA%94%E7%94%A8%E9%89%B4%E6%9D%83/" target="_self">
+          
+          
+            
+          
+          应用鉴权就是当一个用户进入APP时，我们需要判断他所拥有的权利，根据权力来判断他所能进行的一个行为，最为常见的就是购物网站的登录以及购物支付等操作。
+
+一.鉴权的需求背景Http的请求是无状态的，就是说在一个Http请求中的请求方和响应方都是无法维护状态，是一次性的，所以我们就不知道请求前后都发生了什么。所以我们需要标记的功能，而浏览器的sessionStorage，localStorage，全局
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-25 10:23" pubdate>
+              2021-12-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%9C%BA%E6%99%AF%E5%BA%94%E7%94%A8/">场景应用</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/12/25/JSONP%E8%AF%A6%E8%A7%A3/" target="_self">
+          JSONP详解
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/12/25/JSONP%E8%AF%A6%E8%A7%A3/" target="_self">
+          
+          
+            
+          
+          jsonp是一个比较常见的跨域解决方法，这篇博客使用来详解它的用法以及实现原理
+
+1.实现原理script标签的src属性并不被同源策略所约束，所以可以获取任何服务器上脚本并执行，这种性质致使我们可以通过script标签来实现jsonp跨域
+2.实现模式假设A网站需要获取B网站中的某些数据程序B
+123//调用callback函数，并以json数据形式作为阐述传递，完成回调callback(&#1
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-25 10:21" pubdate>
+              2021-12-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/12/25/%E4%BB%8E%E8%BE%93%E5%85%A5URL%E5%88%B0%E9%A1%B5%E9%9D%A2%E5%B1%95%E7%A4%BA%E7%9A%84%E8%AF%A6%E7%BB%86%E8%BF%87%E7%A8%8B/" target="_self">
+          从输入URL到页面展示的详细过程
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/12/25/%E4%BB%8E%E8%BE%93%E5%85%A5URL%E5%88%B0%E9%A1%B5%E9%9D%A2%E5%B1%95%E7%A4%BA%E7%9A%84%E8%AF%A6%E7%BB%86%E8%BF%87%E7%A8%8B/" target="_self">
+          
+          
+            
+          
+          
+1.输入网址url：统一资源定位符，用于定位互联网综上的资源url构成：协议类型://&lt;主机名&gt;:&lt;端口&gt;/&lt;路径&gt;/文件名?参数名#锚点
+2.浏览器查找域名的IP地址（域名解析）浏览器缓存浏览器会检查缓存中有没有这个域名对应的解析过的IP地址，如果缓存中有，这个解析过程就将结束系统缓存浏览器会查看本地硬盘的 hosts 文件，看看其中有没有和这个域名对应的规
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-25 10:05" pubdate>
+              2021-12-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/12/25/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/" target="_self">
+          跨域问题
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/12/25/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/" target="_self">
+          
+          
+            
+          
+          一.为什么会出现跨域问题出于浏览器的同源策略限制。同源策略（Sameoriginpolicy）是一种约定，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，则浏览器的正常功能可能都会受到影响。可以说Web是构建在同源策略基础之上的，浏览器只是针对同源策略的一种实现。同源策略会阻止一个域的javascript脚本和另外一个域的内容进行交互。所谓同源（即指在同一个域）就是两个页面具有相同的协议（
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-25 09:57" pubdate>
+              2021-12-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a>
             
           </div>
         
@@ -291,6 +627,12 @@
   </div>
 
 
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
 
 
 

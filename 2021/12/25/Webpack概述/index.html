@@ -1,0 +1,505 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+  <title>Webpack概述 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"dunktu.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Dunktu</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg/index.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Webpack概述">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-25 00:53" pubdate>
+        2021年12月25日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      49
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Webpack概述</h1>
+            
+            <div class="markdown-body">
+              <h1 id="一-Webpack是什么"><a href="#一-Webpack是什么" class="headerlink" title="一.Webpack是什么"></a>一.Webpack是什么</h1><p>Webpack是一种前端资源构建工具，一个静态模块打包器，在Webpack看来，前端的所有资源文件都会作为模块处理，它将根据模块的依赖关系进行静态分析，打包生成对应的静态资源。</p>
+<h1 id="二-Webpack的核心概念"><a href="#二-Webpack的核心概念" class="headerlink" title="二.Webpack的核心概念"></a>二.Webpack的核心概念</h1><p>**entry（入口）:**指示 webpack 以哪个文件为入口起点开始打包，分析构建内部依赖图。<br><strong>output（输出）：</strong>指示webpack打包后的资源bundles输出到哪里去，以及命名<br><strong>loader：</strong>让 webpack 能够去处理那些非 JS 的文件，比如样式文件、图片文件，webpack只能理解Javascript和JSON文件<br><strong>plugins（插件）：</strong>loader 用于转换某些类型的模块，而插件则可以用于执行范围更广的任务。包括：打包优化，资源管理，注入环境变量<br><strong>mode（模式）：</strong>指示webpack使用相应模式的配置<br><strong>浏览器兼容性（browser compatibility）：</strong>webpack 支持所有符合 ES5 标准的浏览器（不支持 IE8 及以下版本）。webpack 的 <code>import()</code> 和 <code>require.ensure()</code> 需要 <code>Promise</code>。如果你想要支持旧版本浏览器，在使用这些表达式之前，还需要 提前加载 polyfill<br><strong>环境（environment）：</strong>webpack运行的环境</p>
+<h1 id="三-webpack优化配置"><a href="#三-webpack优化配置" class="headerlink" title="三.webpack优化配置"></a>三.webpack优化配置</h1><h2 id="1-开发环境性能优化"><a href="#1-开发环境性能优化" class="headerlink" title="1.开发环境性能优化"></a>1.开发环境性能优化</h2><hr>
+<p><strong>（1）HMR（模块热替换）</strong><br>HMR: hot module replacement 热模块替换 / 模块热替换</p>
+<p>作用：一个模块发生变化，只会重新打包构建这一个模块（而不是打包所有模块） ，极大提升构建速度</p>
+<p>代码：只需要在 devServer 中设置 hot 为 true，就会自动开启HMR功能<br><strong>（只能在开发者模式下使用）</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">devServer:</span> &#123;<br>  <span class="hljs-attr">contentBase:</span> <span class="hljs-string">resolve(__dirname</span>, <span class="hljs-string">&#x27;build&#x27;</span><span class="hljs-string">)</span>,<br>  <span class="hljs-attr">compress:</span> <span class="hljs-literal">true</span>,<br>  <span class="hljs-attr">port:</span> <span class="hljs-number">3000</span>,<br>  <span class="hljs-attr">open:</span> <span class="hljs-literal">true</span>,<br>  <span class="hljs-string">//</span> <span class="hljs-string">开启HMR功能</span><br>  <span class="hljs-string">//</span> <span class="hljs-string">当修改了webpack配置，新配置要想生效，必须重启webpack服务</span><br>  <span class="hljs-attr">hot:</span> <span class="hljs-literal">true</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>每种文件实现热模块替换的情况：</p>
+<ul>
+<li><p>样式文件：可以使用HMR功能，因为开发环境下使用的 style-loader 内部默认实现了热模块替换功能</p>
+</li>
+<li><p>js 文件：默认不能使用HMR功能（修改一个 js 模块所有 js 模块都会刷新）</p>
+</li>
+</ul>
+<p>–&gt; 实现 HMR 需要修改 js 代码（添加支持 HMR 功能的代码）</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span> 绑定<br><span class="hljs-keyword">if</span> (module.hot) &#123;<br>  <span class="hljs-regexp">//</span> 一旦 module.hot 为true，说明开启了HMR功能。 --&gt; 让HMR功能代码生效<br>  module.hot.accept(<span class="hljs-string">&#x27;./print.js&#x27;</span>, <span class="hljs-keyword">function</span>() &#123;<br>    <span class="hljs-regexp">//</span> 方法会监听 print.js 文件的变化，一旦发生变化，只有这个模块会重新打包构建，其他模块不会。<br>    <span class="hljs-regexp">//</span> 会执行后面的回调函数<br>    print();<br>  &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>注意：HMR 功能对 js 的处理，只能处理非入口 js 文件的其他文件。</strong></p>
+<ul>
+<li>html文件：默认不能使用 HMR 功能（html 不用做 HMR 功能，因为只有一个 html 文件，不需要再优化）</li>
+</ul>
+<p><strong>使用 HMR 会导致问题：html 文件不能热更新了（不会自动打包构建）</strong></p>
+<p><strong>解决：修改 entry 入口，将 html 文件引入（这样 html 修改整体刷新）</strong></p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs prolog">entry: [<span class="hljs-string">&#x27;./src/js/index.js&#x27;</span>, <span class="hljs-string">&#x27;./src/index.html&#x27;</span>]<br></code></pre></td></tr></table></figure>
+<p><strong>（2）source-map</strong><br>source-map：一种提供<strong>源代码到构建后代码的映射</strong>的技术 （如果构建后代码出错了，通过映射可以追踪源代码错误）<br><strong>参数</strong>：<code>[inline-|hidden-|eval-][nosources-][cheap-[module-]]source-map</code><br><strong>代码：</strong></p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">devtool: &#x27;<span class="hljs-built_in">eval</span>-source-<span class="hljs-built_in">map</span>&#x27;<br></code></pre></td></tr></table></figure>
+<p>可选方案：[生成source-map的位置|给出的错误代码信息]</p>
+<ul>
+<li><p>source-map：外部，错误代码准确信息 和 源代码的错误位置</p>
+</li>
+<li><p>inline-source-map：内联，只生成一个内联 source-map，错误代码准确信息 和 源代码的错误位置</p>
+</li>
+<li><p>hidden-source-map：外部，错误代码错误原因，但是没有错误位置（为了隐藏源代码），不能追踪源代码错误，只能提示到构建后代码的错误位置</p>
+</li>
+<li><p>eval-source-map：内联，每一个文件都生成对应的 source-map，都在 eval 中，错误代码准确信息 和 源代码的错误位</p>
+</li>
+<li><p>nosources-source-map：外部，错误代码准确信息，但是没有任何源代码信息（为了隐藏源代码）</p>
+</li>
+<li><p>cheap-source-map：外部，错误代码准确信息 和 源代码的错误位置，只能把错误精确到整行，忽略列</p>
+</li>
+<li><p>cheap-module-source-map：外部，错误代码准确信息 和 源代码的错误位置，module 会加入 loader 的 source-map</p>
+</li>
+</ul>
+<p><strong>内联 和 外部的区别：</strong>1. 外部生成了文件，内联没有 2. 内联构建速度更快</p>
+<p><strong>开发/生产环境可做的选择：</strong><br><strong>开发环境：</strong>需要考虑速度快，调试更友好</p>
+<ul>
+<li>速度快( eval &gt; inline &gt; cheap &gt;… )<br>（1）eval-cheap-souce-map<br>（2）eval-source-map</li>
+<li>调试更友好<br>（1）souce-map<br>（2）cheap-module-souce-map<br>（3）cheap-souce-map</li>
+</ul>
+<p><strong>最终得出最好的两种方案 –&gt; eval-source-map（完整度高，内联速度快） / eval-cheap-module-souce-map（错误提示忽略列但是包含其他信息，内联速度快）</strong></p>
+<p><strong>生产环境：</strong>需要考虑源代码要不要隐藏，调试要不要更友好</p>
+<ul>
+<li>内联会让代码体积变大，所以在生产环境不用内联</li>
+<li>隐藏源代码<br>（1）nosources-source-map 全部隐藏<br>（2）hidden-source-map 只隐藏源代码，会提示构建后代码错误信息</li>
+</ul>
+<p><strong>最终得出最好的两种方案 –&gt; source-map（最完整） / cheap-module-souce-map（错误提示一整行忽略列）</strong></p>
+<h2 id="2-生产环境性能优化"><a href="#2-生产环境性能优化" class="headerlink" title="2.生产环境性能优化"></a>2.生产环境性能优化</h2><hr>
+<h3 id="优化打包构建速度"><a href="#优化打包构建速度" class="headerlink" title="优化打包构建速度"></a>优化打包构建速度</h3><p><strong>（1）oneOf</strong><br>oneOf：匹配到loader后就不再向后进行匹配，优化生产环境的打包构建速度<br><strong>代码</strong></p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><code class="hljs gradle">module: &#123;<br>  rules: [<br>    &#123;<br>      <span class="hljs-comment">// js 语法检查</span><br>      test: <span class="hljs-regexp">/\.js$/</span>,<br>      <span class="hljs-keyword">exclude</span>: <span class="hljs-regexp">/node_modules/</span>,<br>      <span class="hljs-comment">// 优先执行</span><br>      enforce: <span class="hljs-string">&#x27;pre&#x27;</span>,<br>      loader: <span class="hljs-string">&#x27;eslint-loader&#x27;</span>,<br>      <span class="hljs-keyword">options</span>: &#123;<br>        fix: <span class="hljs-keyword">true</span><br>      &#125;<br>    &#125;,<br>    &#123;<br>      <span class="hljs-comment">// oneOf 优化生产环境的打包构建速度</span><br>      <span class="hljs-comment">// 以下loader只会匹配一个（匹配到了后就不会再往下匹配了）</span><br>      <span class="hljs-comment">// 注意：不能有两个配置处理同一种类型文件（所以把eslint-loader提取出去放外面）</span><br>      oneOf: [<br>        &#123;<br>          test: <span class="hljs-regexp">/\.css$/</span>,<br>          use: [...commonCssLoader]<br>        &#125;,<br>        &#123;<br>          test: <span class="hljs-regexp">/\.less$/</span>,<br>          use: [...commonCssLoader, <span class="hljs-string">&#x27;less-loader&#x27;</span>]<br>        &#125;,<br>        &#123;<br>          <span class="hljs-comment">// js 兼容性处理</span><br>          test: <span class="hljs-regexp">/\.js$/</span>,<br>          <span class="hljs-keyword">exclude</span>: <span class="hljs-regexp">/node_modules/</span>,<br>          loader: <span class="hljs-string">&#x27;babel-loader&#x27;</span>,<br>          <span class="hljs-keyword">options</span>: &#123;<br>            presets: [<br>              [<br>                <span class="hljs-string">&#x27;@babel/preset-env&#x27;</span>,<br>                &#123;<br>                  useBuiltIns: <span class="hljs-string">&#x27;usage&#x27;</span>,<br>                  corejs: &#123;version: <span class="hljs-number">3</span>&#125;,<br>                  targets: &#123;<br>                    chrome: <span class="hljs-string">&#x27;60&#x27;</span>,<br>                    firefox: <span class="hljs-string">&#x27;50&#x27;</span><br>                  &#125;<br>                &#125;<br>              ]<br>            ]<br>          &#125;<br>        &#125;,<br>        &#123;<br>          test: <span class="hljs-regexp">/\.(jpg|png|gif)/</span>,<br>          loader: <span class="hljs-string">&#x27;url-loader&#x27;</span>,<br>          <span class="hljs-keyword">options</span>: &#123;<br>            limit: <span class="hljs-number">8</span> * <span class="hljs-number">1024</span>,<br>            name: <span class="hljs-string">&#x27;[hash:10].[ext]&#x27;</span>,<br>            outputPath: <span class="hljs-string">&#x27;imgs&#x27;</span>,<br>            esModule: <span class="hljs-keyword">false</span><br>          &#125;<br>        &#125;,<br>        &#123;<br>          test: <span class="hljs-regexp">/\.html$/</span>,<br>          loader: <span class="hljs-string">&#x27;html-loader&#x27;</span><br>        &#125;,<br>        &#123;<br>          <span class="hljs-keyword">exclude</span>: <span class="hljs-regexp">/\.(js|css|less|html|jpg|png|gif)/</span>,<br>          loader: <span class="hljs-string">&#x27;file-loader&#x27;</span>,<br>          <span class="hljs-keyword">options</span>: &#123;<br>            outputPath: <span class="hljs-string">&#x27;media&#x27;</span><br>          &#125;<br>        &#125;<br>      ]<br>    &#125;<br>  ]<br>&#125;,<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意</strong>：如果oneOf中有相同的loader，一定要只在oneOf中只留一个loader</p>
+</blockquote>
+<p><strong>（2）babel缓存：</strong>类似 HMR，将 babel 处理后的资源缓存起来（哪里的 js 改变就更新哪里，其他 js 还是用之前缓存的资源），让第二次打包构建速度更快<br><strong>代码</strong></p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs gradle">&#123;<br>  test: <span class="hljs-regexp">/\.js$/</span>,<br>  <span class="hljs-keyword">exclude</span>: <span class="hljs-regexp">/node_modules/</span>,<br>  loader: <span class="hljs-string">&#x27;babel-loader&#x27;</span>,<br>  <span class="hljs-keyword">options</span>: &#123;<br>    presets: [<br>      [<br>        <span class="hljs-string">&#x27;@babel/preset-env&#x27;</span>,<br>        &#123;<br>          useBuiltIns: <span class="hljs-string">&#x27;usage&#x27;</span>,<br>          corejs: &#123; version: <span class="hljs-number">3</span> &#125;,<br>          targets: &#123;<br>            chrome: <span class="hljs-string">&#x27;60&#x27;</span>,<br>            firefox: <span class="hljs-string">&#x27;50&#x27;</span><br>          &#125;<br>        &#125;<br>      ]<br>    ],<br>    <span class="hljs-comment">// 开启babel缓存</span><br>    <span class="hljs-comment">// 第二次构建时，会读取之前的缓存</span><br>    cacheDirectory: <span class="hljs-keyword">true</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>文件资源缓存：</strong>文件名不变，就不会重新请求，而是再次用之前缓存的资源<br>1.<strong>hash</strong>：每次wepack 打包时会生成一个唯一的 hash 值。<br> <strong>问题</strong>：重新打包，所有文件的 hsah 值都改变，会导致所有缓存失效。（可能只改动了一个文件）<br>2.<strong>chunkhash</strong>：根据 chunk 生成的 hash 值。来源于同一个 chunk的 hash 值一样<br><strong>问题</strong>：js 和 css 来自同一个chunk，hash 值是一样的（因为 css-loader 会将 css 文件加载到 js 中，所以同属于一个chunk）<br>3.<strong>contenthash</strong>: 根据文件的内容生成 hash 值。不同文件 hash 值一定不一样(文件内容修改，文件名里的 hash 才会改变)<br>修改 css 文件内容，打包后的 css 文件名 hash 值就改变，而 js 文件没有改变 hash 值就不变，这样 css 和 js 缓存就会分开判断要不要重新请求资源 –&gt; 让代码上线运行缓存更好使用<br><strong>（3）多进程打包</strong><br>多进程打包：某个任务消耗时间较长会卡顿，多进程可以同一时间干多件事，效率更高。<br><strong>优点</strong>是提升打包速度，缺点是每个进程的开启和交流都会有开销（babel-loader消耗时间最久，所以使用thread-loader针对其进行优化）</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs gradle">&#123;<br>  test: <span class="hljs-regexp">/\.js$/</span>,<br>  <span class="hljs-keyword">exclude</span>: <span class="hljs-regexp">/node_modules/</span>,<br>  use: [<br>    <span class="hljs-comment">/* </span><br><span class="hljs-comment">      thread-loader会对其后面的loader（这里是babel-loader）开启多进程打包。 </span><br><span class="hljs-comment">      进程启动大概为600ms，进程通信也有开销。(启动的开销比较昂贵，不要滥用)</span><br><span class="hljs-comment">      只有工作消耗时间比较长，才需要多进程打包</span><br><span class="hljs-comment">    */</span><br>    &#123;<br>      loader: <span class="hljs-string">&#x27;thread-loader&#x27;</span>,<br>      <span class="hljs-keyword">options</span>: &#123;<br>        workers: <span class="hljs-number">2</span> <span class="hljs-comment">// 进程2个</span><br>      &#125;<br>    &#125;,<br>    &#123;<br>      loader: <span class="hljs-string">&#x27;babel-loader&#x27;</span>,<br>      <span class="hljs-keyword">options</span>: &#123;<br>        presets: [<br>          [<br>            <span class="hljs-string">&#x27;@babel/preset-env&#x27;</span>,<br>            &#123;<br>              useBuiltIns: <span class="hljs-string">&#x27;usage&#x27;</span>,<br>              corejs: &#123; version: <span class="hljs-number">3</span> &#125;,<br>              targets: &#123;<br>                chrome: <span class="hljs-string">&#x27;60&#x27;</span>,<br>                firefox: <span class="hljs-string">&#x27;50&#x27;</span><br>              &#125;<br>            &#125;<br>          ]<br>        ],<br>        <span class="hljs-comment">// 开启babel缓存</span><br>        <span class="hljs-comment">// 第二次构建时，会读取之前的缓存</span><br>        cacheDirectory: <span class="hljs-keyword">true</span><br>      &#125;<br>    &#125;<br>  ]<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>（4） externals</strong><br>externals：让某些库不打包，通过 cdn 引入<br><strong>webpack.config.js 中配置</strong></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">externals: &#123;<br>  <span class="hljs-regexp">//</span> 拒绝jQuery被打包进来(通过cdn引入，速度会快一些)<br>  <span class="hljs-regexp">//</span> 忽略的库名 -- npm包名<br>  jquery: <span class="hljs-string">&#x27;jQuery&#x27;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>需要在 index.html 中通过 cdn 引入：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p><strong>（5）dll</strong><br>dll：让某些库单独打包，后直接引入到 build 中。可以在 code split 分割出 node_modules 后再用 dll 更细的分割，优化代码运行的性能。<br><strong>webpack.dll.js 配置：(将 jquery 单独打包)</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/*</span><br><span class="hljs-comment">  node_modules的库会打包到一起，但是很多库的时候打包输出的js文件就太大了</span><br><span class="hljs-comment">  使用dll技术，对某些库（第三方库：jquery、react、vue...）进行单独打包</span><br><span class="hljs-comment">  当运行webpack时，默认查找webpack.config.js配置文件</span><br><span class="hljs-comment">  需求：需要运行webpack.dll.js文件</span><br><span class="hljs-comment">    --&gt; webpack --config webpack.dll.js（运行这个指令表示以这个配置文件打包）</span><br><span class="hljs-comment">*/</span><br><span class="hljs-keyword">const</span> &#123; resolve &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);<br><span class="hljs-keyword">const</span> webpack = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;webpack&#x27;</span>);<br><br><span class="hljs-built_in">module</span>.exports = &#123;<br>  <span class="hljs-attr">entry</span>: &#123;<br>    <span class="hljs-comment">// 最终打包生成的[name] --&gt; jquery</span><br>    <span class="hljs-comment">// [&#x27;jquery] --&gt; 要打包的库是jquery</span><br>    <span class="hljs-attr">jquery</span>: [<span class="hljs-string">&#x27;jquery&#x27;</span>]<br>  &#125;,<br>  <span class="hljs-attr">output</span>: &#123;<br>    <span class="hljs-comment">// 输出出口指定</span><br>    <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;[name].js&#x27;</span>, <span class="hljs-comment">// name就是jquery</span><br>    <span class="hljs-attr">path</span>: resolve(__dirname, <span class="hljs-string">&#x27;dll&#x27;</span>), <span class="hljs-comment">// 打包到dll目录下</span><br>    <span class="hljs-attr">library</span>: <span class="hljs-string">&#x27;[name]_[hash]&#x27;</span>, <span class="hljs-comment">// 打包的库里面向外暴露出去的内容叫什么名字</span><br>  &#125;,<br>  <span class="hljs-attr">plugins</span>: [<br>    <span class="hljs-comment">// 打包生成一个manifest.json --&gt; 提供jquery的映射关系（告诉webpack：jquery之后不需要再打包和暴露内容的名称）</span><br>    <span class="hljs-keyword">new</span> webpack.DllPlugin(&#123;<br>      <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;[name]_[hash]&#x27;</span>, <span class="hljs-comment">// 映射库的暴露的内容名称</span><br>      <span class="hljs-attr">path</span>: resolve(__dirname, <span class="hljs-string">&#x27;dll/manifest.json&#x27;</span>) <span class="hljs-comment">// 输出文件路径</span><br>    &#125;)<br>  ],<br>  <span class="hljs-attr">mode</span>: <span class="hljs-string">&#x27;production&#x27;</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+<p><strong>webpack.config.js 配置：(告诉 webpack 不需要再打包 jquery，并将之前打包好的 jquery 跟其他打包好的资源一同输出到 build 目录下)</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 引入插件</span><br><span class="hljs-keyword">const</span> webpack = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;webpack&#x27;</span>);<br><span class="hljs-keyword">const</span> AddAssetHtmlWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;add-asset-html-webpack-plugin&#x27;</span>);<br><br><span class="hljs-comment">// plugins中配置：</span><br>plugins: [<br>  <span class="hljs-keyword">new</span> HtmlWebpackPlugin(&#123;<br>    <span class="hljs-attr">template</span>: <span class="hljs-string">&#x27;./src/index.html&#x27;</span><br>  &#125;),<br>  <span class="hljs-comment">// 告诉webpack哪些库不参与打包，同时使用时的名称也得变</span><br>  <span class="hljs-keyword">new</span> webpack.DllReferencePlugin(&#123;<br>    <span class="hljs-attr">manifest</span>: resolve(__dirname, <span class="hljs-string">&#x27;dll/manifest.json&#x27;</span>)<br>  &#125;),<br>  <span class="hljs-comment">// 将某个文件打包输出到build目录下，并在html中自动引入该资源</span><br>  <span class="hljs-keyword">new</span> AddAssetHtmlWebpackPlugin(&#123;<br>    <span class="hljs-attr">filepath</span>: resolve(__dirname, <span class="hljs-string">&#x27;dll/jquery.js&#x27;</span>)<br>  &#125;)<br>]<br></code></pre></td></tr></table></figure>
+<hr>
+<h3 id="优化代码运行的性能"><a href="#优化代码运行的性能" class="headerlink" title="优化代码运行的性能"></a>优化代码运行的性能</h3><p><strong>（1）缓存</strong></p>
+<p><strong>（2）tree shaking（树摇）</strong><br>tree shaking：去除无用代码</p>
+<p><strong>前提</strong>：1. 必须使用 ES6 模块化 2. 开启 production 环境 （这样就自动会把无用代码去掉）</p>
+<p><strong>作用</strong>：减少代码体积</p>
+<p><strong>在 package.json 中配置</strong>：</p>
+<p>“sideEffects”: false 表示所有代码都没有副作用（都可以进行 tree shaking）<br>这样会导致的<strong>问题</strong>：可能会把 css / @babel/polyfill 文件干掉（副作用）<br>所以可以配置：”sideEffects”: [“<em>.css”, “</em>.less”] 不会对css/less文件tree shaking处理<br><strong>（3）code split（代码分割）</strong><br>代码分割：将打包输出的一个大的 bundle.js 文件拆分成多个小文件，这样可以并行加载多个文件，比加载一个文件更快。<br><strong>多入口拆分</strong></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs awk">entry: &#123;<br>    <span class="hljs-regexp">//</span> 多入口：有一个入口，最终输出就有一个bundle<br>    index: <span class="hljs-string">&#x27;./src/js/index.js&#x27;</span>,<br>    test: <span class="hljs-string">&#x27;./src/js/test.js&#x27;</span><br>  &#125;,<br>  output: &#123;<br>    <span class="hljs-regexp">//</span> [name]：取文件名<br>    filename: <span class="hljs-string">&#x27;js/[name].[contenthash:10].js&#x27;</span>,<br>    path: resolve(__dirname, <span class="hljs-string">&#x27;build&#x27;</span>)<br>  &#125;,<br></code></pre></td></tr></table></figure>
+<p><strong>optimization</strong></p>
+<ul>
+<li>将 node_modules 中的代码单独打包（大小超过30kb）</li>
+<li>自动分析多入口chunk中，有没有公共的文件。如果有会打包成单独一个chunk(比如两个模块中都引入了jquery会被打包成单独的文件)（大小超过30kb）<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">optimization</span>: <span class="hljs-string">&#123;</span><br>    <span class="hljs-attr">splitChunks</span>: <span class="hljs-string">&#123;</span><br>      <span class="hljs-attr">chunks</span>: <span class="hljs-string">&#x27;all&#x27;</span><br>    <span class="hljs-attr">&#125;</span><br>  <span class="hljs-attr">&#125;,</span><br></code></pre></td></tr></table></figure></li>
+<li><em>import动态引入语法</em>*<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/*</span><br><span class="hljs-comment">  通过js代码，让某个文件被单独打包成一个chunk</span><br><span class="hljs-comment">  import动态导入语法：能将某个文件单独打包(test文件不会和index打包在同一个文件而是单独打包)</span><br><span class="hljs-comment">  webpackChunkName:指定test单独打包后文件的名字</span><br><span class="hljs-comment">*/</span><br><span class="hljs-keyword">import</span>(<span class="hljs-comment">/* webpackChunkName: &#x27;test&#x27; */</span><span class="hljs-string">&#x27;./test&#x27;</span>)<br>  .then(<span class="hljs-function">(<span class="hljs-params">&#123; mul, count &#125;</span>) =&gt;</span> &#123;<br>    <span class="hljs-comment">// 文件加载成功~</span><br>    <span class="hljs-comment">// eslint-disable-next-line</span><br>    <span class="hljs-built_in">console</span>.log(mul(<span class="hljs-number">2</span>, <span class="hljs-number">5</span>));<br>  &#125;)<br>  .catch(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-comment">// eslint-disable-next-line</span><br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;文件加载失败~&#x27;</span>);<br>  &#125;);<br></code></pre></td></tr></table></figure></li>
+<li><em>（4）lazy loading（懒加载/预加载）</em>*</li>
+</ul>
+<p>1.<strong>懒加载</strong>：当文件需要使用时才加载（需要代码分割）。但是如果资源较大，加载时间就会较长，有延迟。<br>2.<strong>正常加载</strong>：可以认为是并行加载（同一时间加载多个文件）没有先后顺序，先加载了不需要的资源就会浪费时间。<br>3.<strong>预加载 prefetch（兼容性很差）</strong>：会在使用之前，提前加载。等其他资源加载完毕，浏览器空闲了，再偷偷加载这个资源。这样在使用时已经加载好了，速度很快。所以在懒加载的基础上加上预加载会更好。<br><strong>代码</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;btn&#x27;</span>).onclick = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-comment">// 将import的内容放在异步回调函数中使用，点击按钮，test.js才会被加载(不会重复加载)</span><br>  <span class="hljs-comment">// webpackPrefetch: true表示开启预加载</span><br>  <span class="hljs-keyword">import</span>(<span class="hljs-comment">/* webpackChunkName: &#x27;test&#x27;, webpackPrefetch: true */</span><span class="hljs-string">&#x27;./test&#x27;</span>).then(<span class="hljs-function">(<span class="hljs-params">&#123; mul &#125;</span>) =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(mul(<span class="hljs-number">4</span>, <span class="hljs-number">5</span>));<br>  &#125;);<br>  <span class="hljs-keyword">import</span>(<span class="hljs-string">&#x27;./test&#x27;</span>).then(<span class="hljs-function">(<span class="hljs-params">&#123; mul &#125;</span>) =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(mul(<span class="hljs-number">2</span>, <span class="hljs-number">5</span>))<br>  &#125;)<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p><strong>（5）pwa（离线可访问技术）</strong><br>pwa：离线可访问技术（渐进式网络开发应用程序），使用 serviceworker 和 workbox 技术。优点是离线也能访问，缺点是兼容性差。</p>
+<p><strong>webpack.config.js 中配置</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> WorkboxWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;workbox-webpack-plugin&#x27;</span>); <span class="hljs-comment">// 引入插件</span><br><br><span class="hljs-comment">// plugins中加入：</span><br><span class="hljs-keyword">new</span> WorkboxWebpackPlugin.GenerateSW(&#123;<br>  <span class="hljs-comment">/*</span><br><span class="hljs-comment">    1. 帮助serviceworker快速启动</span><br><span class="hljs-comment">    2. 删除旧的 serviceworker</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">    生成一个 serviceworker 配置文件</span><br><span class="hljs-comment">  */</span><br>  <span class="hljs-attr">clientsClaim</span>: <span class="hljs-literal">true</span>,<br>  <span class="hljs-attr">skipWaiting</span>: <span class="hljs-literal">true</span><br>&#125;)<br></code></pre></td></tr></table></figure>
+<p><strong>index.js 中还需要写一段代码来激活它的使用：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/*</span><br><span class="hljs-comment">  1. eslint不认识 window、navigator全局变量</span><br><span class="hljs-comment">    解决：需要修改package.json中eslintConfig配置</span><br><span class="hljs-comment">    &quot;env&quot;: &#123;</span><br><span class="hljs-comment">      &quot;browser&quot;: true // 支持浏览器端全局变量</span><br><span class="hljs-comment">    &#125;</span><br><span class="hljs-comment">  2. sw代码必须运行在服务器上</span><br><span class="hljs-comment">    --&gt; nodejs</span><br><span class="hljs-comment">    或--&gt;</span><br><span class="hljs-comment">      npm i serve -g</span><br><span class="hljs-comment">      serve -s build 启动服务器，将打包输出的build目录下所有资源作为静态资源暴露出去</span><br><span class="hljs-comment">*/</span><br><span class="hljs-keyword">if</span> (<span class="hljs-string">&#x27;serviceWorker&#x27;</span> <span class="hljs-keyword">in</span> navigator) &#123; <span class="hljs-comment">// 处理兼容性问题</span><br>  <span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">&#x27;load&#x27;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>    navigator.serviceWorker<br>      .register(<span class="hljs-string">&#x27;/service-worker.js&#x27;</span>) <span class="hljs-comment">// 注册serviceWorker</span><br>      .then(<span class="hljs-function">() =&gt;</span> &#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;sw注册成功了~&#x27;</span>);<br>      &#125;)<br>      .catch(<span class="hljs-function">() =&gt;</span> &#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;sw注册失败了~&#x27;</span>);<br>      &#125;);<br>  &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+<hr>
+<p><strong>文章学习地址：</strong><a target="_blank" rel="noopener" href="http://www.woc12138.com/article/45">Webpack入门-学习总结 | Woc12138</a></p>
+<p><strong>视频学习地址：</strong><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1e7411j7T5?p=1">尚硅谷最新版Webpack5实战教程(从入门到精通)_哔哩哔哩_bilibili</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Webpack/">Webpack</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/12/25/Ajax/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Ajax</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/12/25/%E5%BC%82%E6%AD%A5%E5%87%BD%E6%95%B0async-awit/">
+                        <span class="hidden-mobile">异步函数async/awit</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="#" rel="nofollow noopener"><span>Dunktu</span></a> <i class="iconfont icon-love"></i> <a href="#" rel="nofollow noopener"><span>涂博闻</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
