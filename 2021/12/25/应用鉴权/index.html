@@ -240,9 +240,7 @@
 <p>1.把session集中存储到独立的redis或者普通数据库中，就可以把session存储到一个库里（<strong>存储角度</strong>）</p>
 <p>2.让相同 IP 的请求在负载均衡时都打到同一台机器上。以 nginx 为例，可以配置 ip_hash 来实现。（<strong>分布角度</strong>）</p>
 <h1 id="四-token"><a href="#四-token" class="headerlink" title="四.token"></a>四.token</h1><p><img src="/images/pasted-20.png" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
-<blockquote>
 <p>1.用户登录，服务端校验账号密码，获得用户信息</p>
-</blockquote>
 <p>2.把用户信息、token 配置编码成 token，通过 cookie set 到浏览器</p>
 <p>3.此后用户请求业务接口，通过 cookie 携带 token</p>
 <p>4.接口校验 token 有效性，进行正常业务接口处理</p>
